@@ -24,4 +24,9 @@ Route::get('/register', [AuthController::class, 'index'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('newregister');
 Route::post('/login', [AuthController::class, 'login'])->name('newlogin');
 
+Route::get('/forgot-password', [AuthController::class, 'forgotpassword'])->name('forgot-password');
+Route::post('/forgot-password', [AuthController::class, 'postforgotpassword'])->name('postforgot-password');
+Route::get('/reset/{token}', [AuthController::class, 'reset'])->name('reset');
+Route::post('/reset/{token}', [AuthController::class, 'postReset']);
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

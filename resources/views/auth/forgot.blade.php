@@ -10,7 +10,7 @@
                 </div>
                 <div class="mt-12 flex flex-col items-center">
                     <h1 class="text-2xl xl:text-3xl font-extrabold">
-                        Sign In
+                        Foregot Password
                     </h1>
                     <div class="w-full flex-1 mt-8">
                         <div class="flex flex-col items-center">
@@ -57,7 +57,7 @@
                                 Or sign up with e-mail
                             </div>
                         </div>
-                        <form action="{{ route('login') }}" method="POST">
+                        <form action="{{ route('postforgot-password') }}" method="POST">
                             @csrf
                             <div class="mx-auto max-w-xs">
                                 <input
@@ -66,12 +66,7 @@
                                 @error('email')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
-                                <input
-                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="password" placeholder="Password" name="password" value="{{ old('password') }}" />
-                                @error('password')
-                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror
+
                                 <button style="background-color:orange;"
                                     class="mt-5 tracking-wide font-semibold  text-gray-100 w-full py-4 rounded-lg  transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                     type="submit">
@@ -87,12 +82,10 @@
                                 </button>
                                 <p class="mt-6 text-xs text-gray-600 text-center">
                                     You can
-                                    <a href="#" class="border-b border-gray-500 border-dotted">
+                                    <a href="{{ route('register') }}" class="border-b border-gray-500 border-dotted">
                                         Register
                                     </a>
-                                    if you don't have an account but if you <a
-                                        class="border-b border-gray-500 border-dotted"
-                                        href="{{ route('forgot-password') }}">forget password</a>
+                                    if you don't have an account
 
                                 </p>
                                 <div class="mt-2 text-xs text-gray-600">
