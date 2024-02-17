@@ -1,4 +1,4 @@
-<footer class="text-gray-600 body-font">
+<footer class="text-gray-600 body-font bg-orange-50">
     <div
         class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
@@ -69,19 +69,19 @@
                         <a class="text-gray-600 hover:text-gray-800">Spain</a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-gray-800">U Kingdom</a>
+                        <a href="" class="text-gray-600 hover:text-gray-800">U Kingdom</a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-gray-800">France</a>
+                        <a href="" class="text-gray-600 hover:text-gray-800">France</a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-gray-800">Morocco</a>
+                        <a href="" class="text-gray-600 hover:text-gray-800">Morocco</a>
                     </li>
                 </nav>
             </div>
         </div>
     </div>
-    <div class="bg-gray-100">
+    <div class="bg-orange-100">
         <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p class="text-gray-500 text-sm text-center sm:text-left">© 2024 E-kolshi —
                 <a href="https://github.com/BilalChbanat" rel="noopener noreferrer" class="text-gray-600 ml-1"

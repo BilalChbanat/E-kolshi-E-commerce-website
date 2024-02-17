@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @vite('resources/css/app.css')
     <title>@yield('title')</title>
-
+    <link rel="icon" href="{{ asset('images/e.png') }}" type="image/gif" sizes="16x16">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -831,40 +831,40 @@
 </head>
 
 <body class="antialiased">
-    <header
-        class="fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-white/80 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
-        <div class="px-4">
-            <div class="flex items-center justify-between">
-                <div class="flex shrink-0">
-                    <a aria-current="page" class="flex items-center" href="/">
-                        <img class="h-7 w-auto"
-                            src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-                            alt="">
-                        <p class="sr-only">Website</p>
-                    </a>
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <img class="w-[10em]" src="{{ asset('images/logo.png') }}" alt="E-kolshi Logo">
+            </a>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                <a class="mr-5 cursor-pointer hover:text-orange-700">First Link</a>
+
+            </nav>
+            @auth
+                <div class="avatar">
+                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    </div>
+                </div>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit">logout</button>
+                </form>
+            @else
+                <div class="flex items-center justify-end gap-3">
+                    <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
+                        href="{{ route('register') }}">Sign up</a>
+                    <a class="inline-flex items-center justify-center rounded-xl bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                        href="{{ route('login') }}">Login</a>
                 </div>
 
-                @auth
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button type="submit">logout</button>
-                    </form>
-                @else
-                    <div class="flex items-center justify-end gap-3">
-                        <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"
-                            href="{{ route('register') }}">Sign up</a>
-                        <a class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                            href="{{ route('login') }}">Login</a>
-                    </div>
-
-                @endauth
-
-            </div>
+            @endauth
         </div>
     </header>
 
     @yield('content')
 
+    @include('layout.footer')
 </body>
 
 </html>
