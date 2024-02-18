@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role_id',
         'password',
     ];
 
@@ -51,5 +52,14 @@ class User extends Authenticatable
     static public function getTokenSingle($remember_token){
         
         return User::where('remember_token', '=', $remember_token)->first();
+    }
+
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasRole($roleName){
+        return $this->role()->where('name' , $roleName)->exists();
     }
 }

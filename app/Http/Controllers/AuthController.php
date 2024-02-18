@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\ForgotPasswordMail;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(Request $request, $user)
     {
         $request->validate([
             'email' => 'required|email',
@@ -35,10 +36,14 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/');
+            if($user->hasRole('admin')){
+                $request->session()->regenerate();
+                return redirect('/dashboard/index');
+            }else{
+                return redirect('/');
+            }
+            
         }
-
         return back()->withInput(['email' => $request->email])->withErrors(['email' => 'Invalid credentials']);
     }
 
@@ -52,10 +57,13 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:8|confirmed',
         ]);
+        
+        $roleUser = Role::where('name' , 'user')->first();
 
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'role_id' => $roleUser->id,
             'password' => Hash::make($request->input('password')),
         ]);
 
