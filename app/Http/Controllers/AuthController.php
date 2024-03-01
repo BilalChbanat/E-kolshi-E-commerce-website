@@ -19,14 +19,20 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect('/');
+        }
         return view('auth.register');
     }
     public function loginForm()
     {
+        if (Auth::check()) {
+            return redirect('/');
+        }
         return view('auth.login');
     }
 
-    public function login(Request $request, $user)
+    public function login(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -36,9 +42,10 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
             if($user->hasRole('admin')){
                 $request->session()->regenerate();
-                return redirect('/dashboard/index');
+                return redirect('/dashboard');
             }else{
                 return redirect('/');
             }

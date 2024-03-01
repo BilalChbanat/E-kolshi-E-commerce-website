@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tailwind Starter Template - Nordic Shop: Tailwind Toolbox</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <meta name="description" content="Free open source Tailwind CSS Store template">
     <meta name="keywords"
@@ -74,28 +82,18 @@
 @extends('layout.app')
 @section('content')
 
-
-    <!--Nav-->
-
-
     <div class="carousel relative container mx-auto" style="max-width:100vw;">
         <div class="carousel-inner relative overflow-hidden w-full">
             <!--Slide 1-->
             <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden=""
                 checked="checked">
             <div class="carousel-item absolute opacity-0" style="height:50vh;">
-                <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-                    style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
-
-                    <div class="container mx-auto">
-                        <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                            <p class="text-black text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</p>
-                            <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                                href="#">view product</a>
-                        </div>
-                    </div>
-
-                </div>
+                <video class="w-[100vw]" height="600" autoplay controls muted>
+                    {{-- <source src="{{ asset('images/Digital Marketing Agency Video Ad - After Effects Template.mp4') }}" type="video/mp4"> --}}
+                    <source src="{{ asset('images/Digital Marketing Agency Video Ad - After Effects Template.mp4') }}"
+                        type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <label for="carousel-3"
                 class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
@@ -162,7 +160,114 @@
 
         </div>
     </div>
+    <!--carousal-->
+    <div class="bg-white">
 
+        <div class="mx-auto  px-4 py-16 sm:px-6 sm:py-24  lg:px-8 w-[90vw]">
+            <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl pb-8">Our
+                popular prodcts</h2>
+            <div
+                class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 owl-carousel owl-theme">
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg"
+                            alt="Hand holding black machined steel mechanical pencil with brass tip and top."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+                </a>
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
+                            alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+                </a>
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg"
+                            alt="Olive drab green insulated bottle with flared screw lid and flat top."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+                </a>
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
+                            alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+                </a>
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg"
+                            alt="Person using a pen to cross a task off a productivity paper card."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
+                </a>
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg"
+                            alt="Hand holding black machined steel mechanical pencil with brass tip and top."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+                </a>
+
+                <a href="#" class="item group">
+                    <div
+                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg"
+                            alt="Olive drab green insulated bottle with flared screw lid and flat top."
+                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                    </div>
+                    <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
+                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+                </a>
+                <!-- More products... -->
+            </div>
+        </div>
+    </div>
+
+    <!--carousal end-->
+
+    {{-- promo --}}
+
+    <div class="w-[90vw] flex flex-col ml-[4.4rem]" data-aos="zoom-in">
+        <div
+            class="bg-gradient-to-br from-orange-600 to-yellow-600 text-white text-center py-10 px-20 rounded-lg shadow-md relative">
+            {{-- <img src="https://i.postimg.cc/KvTqpZq9/uber.png" class="w-20 mx-auto mb-4 rounded-lg"> --}}
+            <h3 class="text-2xl font-semibold mb-4">20% flat off on your first buy <br>using HDFC Credit Card
+            </h3>
+            <div class="flex items-center space-x-2 mb-6">
+                <span id="cpnCode" class="border-dashed border text-white px-4 py-2 rounded-l">STEALDEAL20</span>
+                <span id="cpnBtn"
+                    class="border border-white bg-white text-purple-600 px-4 py-2 rounded-r cursor-pointer">Copy
+                    Code</span>
+            </div>
+            <p class="text-sm">Valid Till: 20Dec, 2024</p>
+
+            <div class="w-12 h-12 bg-white rounded-full absolute top-1/2 transform -translate-y-1/2 left-0 -ml-6"></div>
+            <div class="w-12 h-12 bg-white rounded-full absolute top-1/2 transform -translate-y-1/2 right-0 -mr-6"></div>
+
+        </div>
+    </div>
+    {{-- end promo --}}
     <section class="bg-white py-8">
 
         <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
@@ -196,7 +301,7 @@
                 </div>
             </nav>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1555982105-d25af4182e4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -212,7 +317,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1508423134147-addf71308178?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -228,7 +333,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -244,7 +349,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -260,7 +365,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1467949576168-6ce8e2df4e13?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -276,7 +381,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -292,7 +397,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1550837368-6594235de85c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80">
@@ -308,7 +413,7 @@
                 </a>
             </div>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg"
                         src="https://images.unsplash.com/photo-1551431009-a802eeec77b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400&q=80">
@@ -326,5 +431,32 @@
         </div>
     </section>
 
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            autoplay: true,
+            autoplay: true,
+            autoplayTimeout: 900,
+            autoplayHoverPause: true,
+            dots: false,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
+    <script>
+        AOS.init();
+    </script>
 @endsection
-@section('title', 'login')
+@section('title', 'Home')

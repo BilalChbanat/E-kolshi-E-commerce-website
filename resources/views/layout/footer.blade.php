@@ -2,8 +2,8 @@
     <div
         class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
-            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                <img src="{{ asset('images/logo.png') }}" alt="E-kolshi Logo">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900" data-aos="zoom-in">
+                <img src="{{ asset('images/e-kolshi-logo-removebg-preview.png') }}" alt="E-kolshi Logo" >
             </a>
             <p class="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
         </div>

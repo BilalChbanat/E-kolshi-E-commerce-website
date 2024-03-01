@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
@@ -30,3 +32,27 @@ Route::get('/reset/{token}', [AuthController::class, 'reset'])->name('reset');
 Route::post('/reset/{token}', [AuthController::class, 'postReset']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+
+
+// Dashboard 
+
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+
+//category
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('categories', [CategoryController::class, 'index'])->name('dashboard.categories.index');
+    Route::get('categories/create', [CategoryController::class, 'create'])->name('dashboard.categories.create');
+    Route::post('categories/create', [CategoryController::class, 'store'])->name('dashboard.categories.store');
+    Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('dashboard.categories.edite');
+    Route::put('categories/{id}/edit', [CategoryController::class, 'update'])->name('dashboard.categories.update');
+    Route::get('categories/{id}/delete', [CategoryController::class, 'destroy'])->name('dashboard.categories.delete');
+});
+
+
+
+
+// Route::put('/post/{id}', function (string $id) {
+//     // ...
+// })->middleware('role:editor');

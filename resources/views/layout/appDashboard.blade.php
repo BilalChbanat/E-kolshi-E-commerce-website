@@ -20,12 +20,9 @@
 
 </head>
 
-<body class="antialiased">
-    @include('layout.header')
-
-    @yield('content')
-
-    @include('layout.footer')
+<body class="flex bg-gray-100 min-h-screen">
+    @include('layout.aside')
+    @yield('dashboardcontent')
 </body>
 
 </html>
