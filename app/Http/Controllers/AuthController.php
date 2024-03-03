@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Mail\ForgotPasswordMail;
 use App\Models\Role;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +18,12 @@ use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     public function index()
     {
         if (Auth::check()) {
@@ -43,13 +50,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if($user->hasRole('admin')){
+            if ($user->hasRole('admin')) {
                 $request->session()->regenerate();
                 return redirect('/dashboard');
-            }else{
+            } else {
                 return redirect('/');
             }
-            
         }
         return back()->withInput(['email' => $request->email])->withErrors(['email' => 'Invalid credentials']);
     }
@@ -64,10 +70,10 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:8|confirmed',
         ]);
-        
-        $roleUser = Role::where('name' , 'user')->first();
 
-        $user = User::create([
+        $roleUser = Role::where('name', 'user')->first();
+
+        $user = $this->userRepository->create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'role_id' => $roleUser->id,
@@ -114,20 +120,23 @@ class AuthController extends Controller
             abort(404);
         }
     }
-    
+
     public function postReset($token, Request $request)
-{
-    if ($request->password == $request->cpassword) {
-        $user = User::getTokenSingle($token);
+    {
+        if ($request->password == $request->cpassword) {
+            $user = $this->userRepository->getByToken($token);
 
-        $user->password = bcrypt($request->password);
-        $user->remember_token = Str::random(30);
-        $user->save();
+            if ($user) {
+                $newToken = Str::random(30);
+                $this->userRepository->updatePassword($user, $request->password, $newToken);
 
-        return redirect(url('login'))->with('success', 'Password has been updated successfully');
-    } else {
-        return redirect()->back()->with('error', 'Please confirm the password');
+                return redirect(url('login'))->with('success', 'Password has been updated successfully');
+            } else {
+                abort(404);
+            }
+        } else {
+            return redirect()->back()->with('error', 'Please confirm the password');
+        }
     }
-}
 
 }

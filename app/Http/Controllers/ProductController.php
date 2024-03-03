@@ -2,31 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
-class DashboardController extends Controller
+class ProductController extends Controller
 {
-
-    public function __construct()
-    {
-        // Apply the 'admin' middleware to the entire controller
-        $this->middleware('admin');
-    }
-
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::all()->count();
-        $users = User::all()->count();
-        // $payments = Payment::all()->count();
-        return view('dashboard.index', compact('categories', 'users'));
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +27,7 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         //
     }
@@ -47,7 +35,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
         //
     }
@@ -55,7 +43,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
         //
     }
@@ -63,7 +51,7 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         //
     }
@@ -71,7 +59,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
         //
     }

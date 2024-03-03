@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="container mx-auto flex flex-wrap py-5 pl-5 flex-col md:flex-row items-center">
-        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <a href="{{route('/')}}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <img class="w-[10em]" src="{{ asset('images/logo.png') }}" alt="E-kolshi Logo">
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center px-3">

@@ -61,32 +61,7 @@
             </div>
         </header>
         <main class="p-6 sm:p-10 space-y-6">
-            <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-                <div class="mr-6">
-                    <h1 class="text-4xl font-semibold mb-2">Dashboard</h1>
-                    <h2 class="text-gray-600 ml-0.5">Mobile UX/UI Design course</h2>
-                </div>
-                <div class="flex flex-wrap items-start justify-end -mb-3">
-                    <button
-                        class="inline-flex px-5 py-3 text-purple-600 hover:text-purple-700 focus:text-purple-700 hover:bg-purple-100 focus:bg-purple-100 border border-purple-600 rounded-md mb-3">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            class="flex-shrink-0 h-5 w-5 -ml-1 mt-0.5 mr-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                        </svg>
-                        Manage dashboard
-                    </button>
-                    <button
-                        class="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            class="flex-shrink-0 h-6 w-6 text-white -ml-1 mr-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        Create new dashboard
-                    </button>
-                </div>
-            </div>
+            
             <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
                     <div
@@ -97,8 +72,8 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="block text-2xl font-bold">62</span>
-                        <span class="block text-gray-500">Students</span>
+                        <span class="block text-2xl font-bold">{{$users}}</span>
+                        <span class="block text-gray-500">users</span>
                     </div>
                 </div>
                 <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -140,8 +115,8 @@
                         </svg>
                     </div>
                     <div>
-                        <span class="block text-2xl font-bold">83%</span>
-                        <span class="block text-gray-500">Finished homeworks</span>
+                        <span class="block text-2xl font-bold">{{$categories}}</span>
+                        <span class="block text-gray-500">categories</span>
                     </div>
                 </div>
             </section>
