@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->float('price');
-            $table->integer('quantity');
+            $table->integer('quantityInStock');
+            $table->integer('QuantityAvailable');
+            $table->string('ref');
+            $table->foreign('seller')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

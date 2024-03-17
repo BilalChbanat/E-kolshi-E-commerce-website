@@ -24,9 +24,10 @@
             <a class="mr-5 cursor-pointer hover:text-orange-700">Contact us</a>
 
         </nav>
+        
         @auth
             
-            <button class="inline-flex items-center p-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
+            <button class="inline-flex items-center py-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
                     <span class="sr-only">User Menu</span>
                     <div class="hidden md:flex md:flex-col md:items-end md:leading-tight">
                         <span class="font-semibold">Grace Simmons</span>

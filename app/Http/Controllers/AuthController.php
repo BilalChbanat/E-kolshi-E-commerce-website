@@ -43,6 +43,10 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
+            'postal_code' => 'required|max:255|integer',
+            'country' => 'required|max:255|string',
+            'city' => 'required|max:255|string',
+            'address' => 'required|max:255|string',
             'password' => 'required',
         ]);
 
@@ -69,6 +73,10 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:8|confirmed',
+            'postal_code' => 'required|max:255|integer',
+            'country' => 'required|max:255|string',
+            'city' => 'required|max:255|string',
+            'address' => 'required|max:255|string',
         ]);
 
         $roleUser = Role::where('name', 'user')->first();
@@ -76,6 +84,10 @@ class AuthController extends Controller
         $user = $this->userRepository->create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'postal_code' => $request->input('postal_code'),
+            'country' => $request->input('country'),
+            'city' => $request->input('city'), 
+            'address' => $request->input('address'),
             'role_id' => $roleUser->id,
             'password' => Hash::make($request->input('password')),
         ]);
