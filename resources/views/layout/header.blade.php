@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="container mx-auto flex flex-wrap py-5 pl-5 flex-col md:flex-row items-center">
-        <a href="{{route('/')}}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <a href="{{ route('/') }}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <img class="w-[10em]" src="{{ asset('images/logo.png') }}" alt="E-kolshi Logo">
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center px-3">
@@ -24,18 +24,18 @@
             <a class="mr-5 cursor-pointer hover:text-orange-700">Contact us</a>
 
         </nav>
-        
+
         @auth
-            
-            <button class="inline-flex items-center py-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
+            <div class="hs-dropdown relative inline-flex">
+                <button id="hs-dropdown-basic" type="button"
+                    class="hs-dropdown-toggle inline-flex items-center py-2 hover:bg-gray-100 focus:bg-gray-100 rounded-lg">
                     <span class="sr-only">User Menu</span>
                     <div class="hidden md:flex md:flex-col md:items-end md:leading-tight">
-                        <span class="font-semibold">Grace Simmons</span>
-                        <span class="text-sm text-gray-600">Lecturer</span>
+                        <span class="font-semibold">{{ $user->name }}</span>
+                        <span class="text-sm text-gray-600">{{ $user->role->name }}</span>
                     </div>
                     <span class="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="user profile photo"
-                            class="h-full w-full object-cover">
+                        <img src="images/14.jpg" alt="user profile photo" class="h-full w-full object-cover">
                     </span>
                     <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"
                         class="hidden sm:block h-6 w-6 text-gray-800">
@@ -44,6 +44,15 @@
                             clip-rule="evenodd" />
                     </svg>
                 </button>
+                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 shadow-md rounded-lg p-2 bg-white  border-gray-700 divide-gray-700"
+                        aria-labelledby="hs-dropdown-basic">
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black  focus:outline-none  hover:text-black"
+                            href="{{ route('logout') }}">
+                            Logout
+                        </a>
+                    </div>
+            </div>
+            
         @else
             <div class="flex items-center justify-end gap-3">
                 <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"

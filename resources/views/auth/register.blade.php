@@ -31,7 +31,7 @@
                             class="flex justify-center items-center border- pt-4 rounded-md border border-gray-400 border-dashed">
                             <label class="relative flex items-center p-3 -mt-5 rounded-full cursor-pointer"
                                 htmlFor="description">
-                                <input type="checkbox"
+                                <input type="checkbox" name="seller"
                                     class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                     id="description" />
                                 <span
@@ -58,7 +58,7 @@
                         
                         <div>
                             <label for="postal_code" class="block mb-2 text-sm font-medium text-gray-900 ">Postal code</label>
-                            <input type="text" name="postal_code" id="postal_code" placeholder="40 000"
+                            <input type="number" name="postal_code" id="postal_code" placeholder="40 000"
                                 value="{{ old('postal_code') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                 required>

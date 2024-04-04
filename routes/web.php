@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
 
+//Home
+Route::get('/', [HomeController::class, 'index'])->name('/');
 
+//auth
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::get('/register', [AuthController::class, 'index'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('newregister');
@@ -31,7 +33,7 @@ Route::post('/forgot-password', [AuthController::class, 'postforgotpassword'])->
 Route::get('/reset/{token}', [AuthController::class, 'reset'])->name('reset');
 Route::post('/reset/{token}', [AuthController::class, 'postReset']);
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 
 
@@ -41,13 +43,23 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.
 
 
 //category
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('categories', [CategoryController::class, 'index'])->name('dashboard.categories.index');
     Route::get('categories/create', [CategoryController::class, 'create'])->name('dashboard.categories.create');
     Route::post('categories/create', [CategoryController::class, 'store'])->name('dashboard.categories.store');
-    Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('dashboard.categories.edite');
+    Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('dashboard.categories.edit');
     Route::put('categories/{id}/edit', [CategoryController::class, 'update'])->name('dashboard.categories.update');
     Route::get('categories/{id}/delete', [CategoryController::class, 'destroy'])->name('dashboard.categories.delete');
+});
+
+//products
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('products', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('dashboard.products.create');
+    Route::post('products/create', [ProductController::class, 'store'])->name('dashboard.products.store');
+    Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('dashboard.products.edit');
+    Route::put('products/{id}/edit', [ProductController::class, 'update'])->name('dashboard.products.update');
+    Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
 });
 
 

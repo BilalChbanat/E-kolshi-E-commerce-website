@@ -43,10 +43,6 @@ class AuthController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'postal_code' => 'required|max:255|integer',
-            'country' => 'required|max:255|string',
-            'city' => 'required|max:255|string',
-            'address' => 'required|max:255|string',
             'password' => 'required',
         ]);
 
@@ -73,13 +69,17 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|min:8|confirmed',
-            'postal_code' => 'required|max:255|integer',
+            'postal_code' => 'required|integer',
             'country' => 'required|max:255|string',
             'city' => 'required|max:255|string',
             'address' => 'required|max:255|string',
         ]);
 
-        $roleUser = Role::where('name', 'user')->first();
+        if($request->has('seller')){
+            $roleUser = Role::where('name', 'seller')->first();
+        }else{
+            $roleUser = Role::where('name', 'user')->first();
+        }
 
         $user = $this->userRepository->create([
             'name' => $request->input('name'),
