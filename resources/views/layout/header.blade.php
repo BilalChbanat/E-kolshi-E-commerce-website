@@ -45,14 +45,17 @@
                     </svg>
                 </button>
                 <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 shadow-md rounded-lg p-2 bg-white  border-gray-700 divide-gray-700"
-                        aria-labelledby="hs-dropdown-basic">
-                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black  focus:outline-none  hover:text-black"
-                            href="{{ route('logout') }}">
-                            Logout
-                        </a>
-                    </div>
+                    aria-labelledby="hs-dropdown-basic">
+                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black  focus:outline-none  hover:text-black"
+                        href="{{ route('profile.show',$user->id) }}">
+                        Profile
+                    </a>
+                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black  focus:outline-none  hover:text-black"
+                        href="{{ route('logout') }}">
+                        Logout
+                    </a>
+                </div>
             </div>
-            
         @else
             <div class="flex items-center justify-end gap-3">
                 <a class="hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex"

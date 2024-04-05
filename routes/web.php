@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,7 +64,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 
+//  Profile 
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+});
 
 // Route::put('/post/{id}', function (string $id) {
 //     // ...

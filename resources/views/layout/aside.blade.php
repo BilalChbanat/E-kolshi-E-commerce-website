@@ -10,7 +10,7 @@
                 </div>
                 <ul class="mt-12">
                     <li class="flex w-full justify-between text-gray-800 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center ">
+                        <a href="{{route('dashboard.index')}}" class="flex items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid"
                                 width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -22,13 +22,11 @@
                             </svg>
                             <span class="text-sm ml-2">Dashboard</span>
                         </a>
-                        <div
-                            class="py-1 px-3 bg-blue-400 rounded text-gray-800 flex items-center justify-center text-xs">
-                            5</div>
+                        
                     </li>
                     <li
                         class="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center ">
+                        <a href="{{route('dashboard.products.index')}}" class="flex items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle"
                                 width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -45,7 +43,7 @@
                     </li>
                     <li
                         class="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-6">
-                        <a href="javascript:void(0)" class="flex items-center ">
+                        <a href="{{route('dashboard.categories.index')}}" class="flex items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass"
                                 width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -53,8 +51,11 @@
                                 <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
                                 <circle cx="12" cy="12" r="9"></circle>
                             </svg>
-                            <span class="text-sm ml-2">Performance</span>
+                            <span class="text-sm ml-2">categories</span>
                         </a>
+                        <div
+                            class="py-1 px-3 bg-blue-400 rounded text-gray-800 flex items-center justify-center text-xs">
+                            5</div>
                     </li>
                     <li
                         class="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-6">
@@ -67,7 +68,7 @@
                                 <polyline points="17 8 21 12 17 16"></polyline>
                                 <line x1="14" y1="4" x2="10" y2="20"></line>
                             </svg>
-                            <span class="text-sm ml-2">Deliverables</span>
+                            <span class="text-sm ml-2">users</span>
                         </a>
                     </li>
                     <li
@@ -98,7 +99,7 @@
                                 <polyline points="4 12 12 16 20 12" />
                                 <polyline points="4 16 12 20 20 16" />
                             </svg>
-                            <span class="text-sm ml-2">Inventory</span>
+                            <span class="text-sm ml-2">Profile</span>
                         </a>
                     </li>
                     <li
