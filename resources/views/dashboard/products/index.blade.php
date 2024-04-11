@@ -136,8 +136,9 @@
                         <tr>
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center gap-3">
-                                    <div class="flex flex-col">
-                                        <img class="w-[20rem]" src="{{$item->image}}" alt="">
+                                    <div class="flex flex-col w-[6rem]">
+                                        <img class="w-[20rem]" src="{{ asset( $item->image) }}" alt="Product image">
+
 
                                     </div>
                                 </div>

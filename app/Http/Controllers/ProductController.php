@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -34,16 +37,26 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.products.create');
+        $categories = Category::all();
+        $user = Auth::user();
+        return view('dashboard.products.create', compact('categories', 'user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
-        $path = 'uploads/';
+        $validatedData = $request->validate([
+            'title' => 'required|max:255|string',
+            'image' => 'nullable|mimes:png,jpeg,jpg,webp',
+            'quantityInStock' => 'required|integer',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $path = 'uploads/Products/';
         $fileName = null;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -61,15 +74,16 @@ class ProductController extends Controller
             'price' => $validatedData['price'],
             'description' => $validatedData['description'],
             'seller' => Auth::id(),
-            'category_id' => $validatedData['category_id'],
+            'ref' => Str::random(22),
+            'category_id' => $validatedData['category_id']
         ];
 
-        // dd($data);
+        Product::create($data);
 
-        $Product = Product::create($data);
-
-        return redirect()->back()->with('status', 'Product Created successfully');
+        return redirect()->back()->with('status', 'Product created successfully');
     }
+
+
 
     /**
      * Display the specified resource.

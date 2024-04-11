@@ -59,30 +59,118 @@
                 </div>
             </div>
         </header>
-        <h1 class="pl-8 pt-8 text-[2rem] text-gray-700">Add Categories</h1>
+        <h1 class="pl-8 pt-8 text-[2rem] text-gray-700">Add Product</h1>
         <div class="p-6 overflow-scroll px-0">
-            <a href="{{ route('dashboard.categories.index') }}"
+            <a href="{{ route('dashboard.products.index') }}"
                 class="ml-6 text-[.75rem] p-2 text-gray-500 border-b border-dotted">
                 <- Back to previous page </a>
-
                     @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                        
+                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 w-[97%] ml-6"
+                            role="alert">
+                            <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path
+                                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                                    </svg></div>
+                                <div>
+                                    <p class="font-bold">{{ session('status') }}</p>
+                                </div>
+                            </div>
                         </div>
                     @endif
+                    <div class="w-full min-w-max p-8 text-center flex flex-col items-center justify-center">
+                        <div class="bg-gray-100 transition-colors duration-300 w-[75vw] h-[70vh]">
+                            <div class="container mx-auto  p-4">
+                                <div class="bg-white shadow rounded-lg p-6">
+                                    <form action="{{ url('products/create') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                            <input type="text" placeholder="Product name"
+                                                class="border p-2 rounded w-full" name="title" required
+                                                value="{{ old('title') }}">
+                                            @error('title')
+                                                <span class="text-red-700">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-4">
+                                            <input type="email" placeholder="Email address" value="{{ $user->email }}"
+                                                class="border p-2 rounded w-full cursor-not-allowed" name="email"
+                                                disabled>
+                                        </div>
+                                        {{-- <div class="mb-4">
+                                            <input type="number" placeholder="quantity In Available"
+                                                class="border p-2 rounded w-full cursor-not-allowed" name="QuantityAvailable"
+                                               >
+                                        </div> --}}
+                                        <div class="mb-4">
+                                            <input type="number" placeholder="quantity In Stock"
+                                                class="border p-2 rounded w-full" name="quantityInStock"
+                                                value="{{ old('quantityInStock') }}">
+                                            @error('quantityInStock')
+                                                <span class="text-red-700">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-4">
+                                            <input type="number" placeholder="Product price"
+                                                class="border p-2 rounded w-full" name="price"
+                                                value="{{ old('price') }}">
+                                            @error('price')
+                                                <span class="text-red-700">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-4">
+                                            <select name="category_id" id="category_id"
+                                                class="border p-2 rounded w-full">
+                                                @foreach ($categories as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ old('category_id') == $item->id ? 'selected' : '' }}>
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_id')
+                                                <span class="text-red-700">{{ $message }}</span>
+                                            @enderror
+                                        </div>
 
-                    <div class="mt-4 w-full min-w-max p-8 text-center flex flex-col items-center justify-center">
-                        <form class="text-center flex flex-col w-[50%] items-center justify-center" method="POST"
-                            action="{{ url('categories/create') }}">
-                            @csrf
-                            <input
-                                class="px-4 py-1 w-[50%] focus:outline-none border-2 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-md"
-                                type="text" required name="name" value="{{ old('name') }}" placeholder="Tech ...">
-                            @error('name')
-                                <span class="text-danger"> {{ $message }} </span>
-                            @enderror
-                            <button class="bg-blue-400 px-6 py-2 rounded-md mt-3 text-white" type="submit">ADD</button>
-                        </form>
+                                        <div class="flex items-center justify-center w-full">
+                                            <label for="dropzone-file"
+                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100 ">
+                                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                    <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 20 16">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                    </svg>
+                                                    <p class="mb-2 text-sm text-gray-500 "><span
+                                                            class="font-semibold">Click to
+                                                            upload</span>
+                                                        or drag and drop</p>
+                                                    <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX.
+                                                        800x400px)</p>
+                                                </div>
+                                                <input id="dropzone-file" type="file" class="hidden"
+                                                    name="image" />
+                                            </label>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <textarea name="description" id="myeditorinstance" cols="30" rows="10"></textarea>
+                                        </div>
+                                        <button type="submit"
+                                            class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 focus:outline-none transition-colors">
+                                            SUBMIT
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
         </div>
     </div>

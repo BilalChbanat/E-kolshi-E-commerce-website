@@ -54,10 +54,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 //products
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('products', [ProductController::class, 'index'])->name('dashboard.products.index');
     Route::get('products/create', [ProductController::class, 'create'])->name('dashboard.products.create');
-    Route::post('products/create', [ProductController::class, 'store'])->name('dashboard.products.store');
+    Route::post('products/create', [ProductController::class, 'store'])->name('dashboard.products.create');
     Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('dashboard.products.edit');
     Route::put('products/{id}/edit', [ProductController::class, 'update'])->name('dashboard.products.update');
     Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
@@ -70,6 +70,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
-// Route::put('/post/{id}', function (string $id) {
-//     // ...
-// })->middleware('role:editor');
+Route::put('/post/{id}', function (string $id) {
+    // ...
+})->middleware('role:editor');

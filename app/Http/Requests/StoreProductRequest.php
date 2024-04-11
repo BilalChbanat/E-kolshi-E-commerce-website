@@ -25,9 +25,10 @@ class StoreProductRequest extends FormRequest
             'title' => 'required|max:255|string',
             'image' => 'nullable|mimes:png,jpeg,jpg,webp',
             'quantityInStock' => 'required|integer',
+            'QuantityAvailable' => 'required|integer',
             'price' => 'required|numeric',
             'description' => 'required|string',
-            // 'ref' => 'required|max:255|string',
+            'ref' => 'required|max:255|string',
             'seller' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
         ];
