@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\ProductRepository;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -96,18 +97,59 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(int $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $user = Auth::user();
+        $categories = Category::all();
+        return view('dashboard.products.edit', compact('user', 'categories', 'product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, int $id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255|string',
+            'image' => 'nullable|mimes:png,jpeg,jpg,webp',
+            'quantityInStock' => 'required|integer',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $path = 'uploads/Products/';
+        $fileName = null;
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+
+            $file->move($path, $fileName);
+
+            if (File::exists(public_path($product->image))) {
+                File::delete(public_path($product->image));
+            }
+        }
+
+        $product->update([
+            'title' => $validatedData['title'],
+            'image' => $fileName ? $path . $fileName : null,
+            'quantityInStock' => $validatedData['quantityInStock'],
+            'QuantityAvailable' => $validatedData['quantityInStock'],
+            'price' => $validatedData['price'],
+            'description' => $validatedData['description'],
+            'seller' => Auth::id(),
+            // 'ref' => Str::random(22),
+            'category_id' => $validatedData['category_id']
+        ]);
+
+        return redirect()->back()->with('status', 'Product updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
