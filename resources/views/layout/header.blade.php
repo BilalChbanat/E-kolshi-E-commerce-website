@@ -2,7 +2,7 @@
     <div class="py-[12px] bg-[#1E1F29] flex">
         <div class="w-[100vw] px-[15px] text-gray-300 ">
             <ul class="float-left flex ">
-                <li class="mr-[15px] text-[12px]"><a href="#"><i class="fa fa-phone"></i> +212-7</a></li>
+                <li class="mr-[15px] text-[12px]"><a href="#"><i class="fa fa-phone"></i> +212-723-423-911</a></li>
                 <li class="mr-[15px] text-[12px]"><a href="#"><i class="fa fa-envelope-o"></i>
                         e-kolshi@support.com</a></li>
                 <li class="mr-[15px] text-[12px]"><a href="#"><i class="fa fa-map-marker"></i> Stonecoal 1734
@@ -93,11 +93,11 @@
                 </a>
             </div>
             <div class="pl-4 pb-2 flex justify-center items-center">
-                <a href="#" class="relative py-2">
+                <a href="{{route('shopping.cart')}}" class="relative py-2">
                     <div class="t-0 absolute left-3">
                         <p
                             class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-                            3
+                            {{ count((array) session('cart')) }}
                         </p>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

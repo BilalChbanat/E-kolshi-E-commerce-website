@@ -63,6 +63,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
 });
 
+// cart 
+
+Route::get('/shopping-cart', [ProductController::class, 'productCart'])->name('shopping.cart');
+Route::get('/product/{id}', [ProductController::class, 'addProducttoCart'])->name('addproduct.to.cart');
+Route::patch('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.shopping.cart');
+Route::delete('/delete-cart-product', [ProductController::class, 'deleteProduct'])->name('delete.cart.product');
+Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 
 //  Profile 
 
