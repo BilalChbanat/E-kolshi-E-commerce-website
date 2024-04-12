@@ -6,8 +6,8 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Repositories\CategoryRepository;
-use App\Repositories\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -23,8 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $categories = $this->categoryRepository->getAll();
-        return view('dashboard.categories.index', compact('categories'));
+        return view('dashboard.categories.index', compact('categories','user'));
     }
 
     /**
@@ -32,7 +33,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create');
+        $user = Auth::user();
+        return view('dashboard.categories.create', compact('user'));
     }
 
     /**

@@ -3,26 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\ProductRepository;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
-
     private $productRepository;
 
     public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -79,19 +75,9 @@ class ProductController extends Controller
             'category_id' => $validatedData['category_id']
         ];
 
-        Product::create($data);
+        $this->productRepository->create($data);
 
         return redirect()->back()->with('status', 'Product created successfully');
-    }
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
     }
 
     /**
@@ -99,7 +85,7 @@ class ProductController extends Controller
      */
     public function edit(int $id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->productRepository->getById($id);
         $user = Auth::user();
         $categories = Category::all();
         return view('dashboard.products.edit', compact('user', 'categories', 'product'));
@@ -119,7 +105,6 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        $product = Product::findOrFail($id);
         $path = 'uploads/Products/';
         $fileName = null;
 
@@ -130,12 +115,13 @@ class ProductController extends Controller
 
             $file->move($path, $fileName);
 
+            $product = $this->productRepository->getById($id);
             if (File::exists(public_path($product->image))) {
                 File::delete(public_path($product->image));
             }
         }
 
-        $product->update([
+        $data = [
             'title' => $validatedData['title'],
             'image' => $fileName ? $path . $fileName : null,
             'quantityInStock' => $validatedData['quantityInStock'],
@@ -143,19 +129,21 @@ class ProductController extends Controller
             'price' => $validatedData['price'],
             'description' => $validatedData['description'],
             'seller' => Auth::id(),
-            // 'ref' => Str::random(22),
             'category_id' => $validatedData['category_id']
-        ]);
+        ];
+
+        $this->productRepository->update($id, $data);
 
         return redirect()->back()->with('status', 'Product updated successfully');
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(int $id)
     {
-        //
+        $this->productRepository->delete($id);
+
+        return redirect()->back()->with('status', 'Product deleted successfully');
     }
 }

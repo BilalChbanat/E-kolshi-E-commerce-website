@@ -1,8 +1,8 @@
 <?php
-namespace App\Repositories;
+namespace App\Interfaces;
 
 
-interface ProductRepositoryInterface
+interface CategoryRepositoryInterface
 {
 
     public function getAll();

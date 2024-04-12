@@ -36,7 +36,7 @@ Route::post('/reset/{token}', [AuthController::class, 'postReset']);
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-
+Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
 // Dashboard 
 

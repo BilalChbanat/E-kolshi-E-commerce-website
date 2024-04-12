@@ -137,7 +137,7 @@
                             <td class="p-4 border-b border-blue-gray-50">
                                 <div class="flex items-center gap-3">
                                     <div class="flex flex-col w-[6rem]">
-                                        <img class="w-[20rem]" src="{{ asset( $item->image) }}" alt="Product image">
+                                        <img class="w-[20rem] h-[6.5rem]" src="{{ asset( $item->image) }}" alt="Product image">
 
 
                                     </div>
@@ -180,7 +180,7 @@
                                         </svg>
                                     </span>
                                 </a>
-                                <a  onclick="return confirm('Are you sure You want to delete it?')" href=" {{ url('categories/' .$item->id. '/delete') }}"
+                                <a  onclick="return confirm('Are you sure You want to delete it?')" href=" {{ url('products/' .$item->id. '/delete') }}"
                                     class=" mx-3 flex justify-center items-center p-2 cursor-pointer relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30">
 
                                     <span>
