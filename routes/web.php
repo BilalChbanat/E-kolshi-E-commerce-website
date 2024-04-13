@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
 // search and filter 
 
 Route::get('/products', [HomeController::class, 'index'])->name('products.filter.index');
-Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.events.search');
+Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.products.search');
 
 Route::put('/post/{id}', function (string $id) {
     // ...
