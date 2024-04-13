@@ -141,7 +141,6 @@
                 class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
             <label for="carousel-1"
                 class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900  leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
-
             <!-- Add additional indicators for each slide-->
             <ol class="carousel-indicators">
                 <li class="inline-block mr-3">
@@ -157,18 +156,15 @@
                         class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
                 </li>
             </ol>
-
         </div>
     </div>
     <!--carousal-->
     <div class="bg-white">
-
         <div class="mx-auto  px-4 py-16 sm:px-6 sm:py-24  lg:px-8 w-[90vw]">
             <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl pb-8">Our
                 popular prodcts</h2>
             <div
                 class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 owl-carousel owl-theme">
-
                 @foreach ($products as $item)
                     <a href="#" class="item group">
                         <div
@@ -179,12 +175,10 @@
                         <p class="mt-1 text-lg font-medium text-gray-900">${{ $item->price }}</p>
                     </a>
                 @endforeach
-
             </div>
         </div>
     </div>
     <!--carousal end-->
-
     <div class="w-[90vw] flex flex-col ml-[4.4rem]" data-aos="zoom-in">
         <div
             class="bg-gradient-to-br from-orange-600 to-yellow-600 text-white text-center py-10 px-20 rounded-lg shadow-md relative">
@@ -217,46 +211,77 @@
                         Store
                     </a>
 
-                    <div class="flex items-center" id="store-nav-content">
+                    <div class="flex w-full justify-center items-center">
+                        {{-- Search  --}}
+                        <div class="w-[30rem]  bg-gray-900 mt-7">
+                            <label for="default-search"
+                                class="mb-2 text-sm font-medium  sr-only text-white">Search</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4  text-gray-400 px-2" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                                <input type="search" id="search"
+                                    class="block w-full p-4 ps-10 text-sm  border  rounded-lg bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Search Mockups, Logos..." required />
+                                <button type="submit"
+                                    class="text-white absolute end-2.5 bottom-2.5  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Search</button>
+                            </div>
+                        </div>
+                        {{-- end Search  --}}
+                        {{-- filter --}}
+                        <div class="mt-6 ml-4 ">
+                            <div class="hs-dropdown relative inline-flex">
+                                <button id="hs-dropdown-basic" type="button"
+                                    class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-gray-900 text-gray-300 shadow-sm hover:bg-gray-8000 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                    Filter
+                                    <svg class="hs-dropdown-open:rotate-180 size-4 text-gray-600"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m6 9 6 6 6-6" />
+                                    </svg>
+                                </button>
 
-                        <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24">
-                                <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
-                            </svg>
-                        </a>
-
-                        <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24">
-                                <path
-                                    d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
-                            </svg>
-                        </a>
-
+                                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 shadow-md rounded-lg p-2 bg-gray-800 dark:border border-gray-700 divide-gray-700"
+                                    aria-labelledby="hs-dropdown-basic">
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 hover:bg-gray-800 focus:outline-none  hover:text-gray-300 focus:bg-gray-700"
+                                        href="{{ route('/') }}">
+                                        All
+                                    </a>
+                                    @foreach ($categories as $item)
+                                        <a class="{{ $selectedCategory == $item->id ? 'font-bold' : '' }} flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 hover:bg-gray-800 focus:outline-none hover:text-gray-300 focus:bg-gray-700"
+                                            href="{{ url('/products?category=' . $item->id) }}">
+                                            {{ $item->name }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
-
-            @foreach ($products as $item)
-                <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
-                    <a href="{{ route('addproduct.to.cart', $item->id) }}">
-                        <img class="hover:grow hover:shadow-lg"
-                            src="{{asset($item->image)}}">
-                        <div class="pt-3 flex items-center justify-between">
-                            <p class="">Product Name</p>
-                            <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
-                            </svg>
-                        </div>
-                        <p class="pt-1 text-gray-900">£9.99</p>
-                    </a>
-                </div>
-            @endforeach
-
-
+            <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12" id="place_result">
+                @foreach ($products as $item)
+                    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col" data-aos="zoom-out">
+                        <a href="{{ route('addproduct.to.cart', $item->id) }}">
+                            <img class="hover:grow hover:shadow-lg" src="{{ asset($item->image) }}">
+                            <div class="pt-3 flex items-center justify-between">
+                                <p class="">{{ $item->title }}</p>
+                                <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
+                                </svg>
+                            </div>
+                            <p class="pt-1 text-gray-900">{{ $item->price }}</p>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
 
         </div>
     </section>

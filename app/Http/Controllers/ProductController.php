@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -190,6 +191,21 @@ class ProductController extends Controller
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product successfully deleted.');
+        }
+    }
+
+
+    public function showProdcut(Request $request)
+    {
+        $products = $this->productRepository->getAll();
+
+        if (!empty($request->keyword)) {
+            $products = Product::where("title", "like", "%" . $request->keyword . "%")->get();
+            return view('searchResault', compact('products'));
+
+        } else {
+            $products = $this->productRepository->getAll();
+            return view('searchResault', compact('products'));
         }
     }
 

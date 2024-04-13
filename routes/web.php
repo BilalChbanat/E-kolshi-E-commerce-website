@@ -77,6 +77,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
+// search and filter 
+
+Route::get('/products', [HomeController::class, 'index'])->name('products.filter.index');
+Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.events.search');
+
 Route::put('/post/{id}', function (string $id) {
     // ...
 })->middleware('role:editor');
