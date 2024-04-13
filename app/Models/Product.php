@@ -23,10 +23,12 @@ class Product extends Model
         'category_id'
     ];
 
-    public function user()
+    public function productSeller()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'seller');
     }
+
+
 
     public function category()
     {

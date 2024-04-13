@@ -24,6 +24,9 @@ export default {
                     950: "#431407",
                 },
             },
+            gridTemplateRows: {
+          '[auto,auto,1fr]': 'auto auto 1fr',
+        },
         },
         fontFamily: {
             body: [

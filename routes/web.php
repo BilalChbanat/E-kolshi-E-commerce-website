@@ -42,6 +42,8 @@ Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.sh
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
+//Product details
+Route::get('products/{id}/detail', [ProductController::class, 'show'])->name('dashboard.products.show');
 
 //category
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -85,3 +87,5 @@ Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard
 Route::put('/post/{id}', function (string $id) {
     // ...
 })->middleware('role:editor');
+
+

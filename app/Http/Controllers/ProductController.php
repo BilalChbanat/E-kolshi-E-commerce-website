@@ -30,6 +30,13 @@ class ProductController extends Controller
         return view('dashboard.products.index', compact('products'));
     }
 
+    public function show(int $id)
+    {
+        $user = Auth::user();
+        $product = $this->productRepository->getById($id);
+        return view('dashboard.products.show', compact('product','user'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
