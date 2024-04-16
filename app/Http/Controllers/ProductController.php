@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $product = $this->productRepository->getById($id);
-        return view('dashboard.products.show', compact('product','user'));
+        return view('dashboard.products.show', compact('product', 'user'));
     }
 
     /**
@@ -215,5 +215,48 @@ class ProductController extends Controller
             return view('searchResault', compact('products'));
         }
     }
+
+    public function wishlist()
+    {
+        $user = Auth::user();
+        return view('collections.wishlist', compact('user'));
+    }
+
+    public function addTowishlist($id)
+    {
+        $product = $this->productRepository->getById($id);
+        $wishlist = session()->get('wishlist', []);
+
+        if (array_key_exists($id, $wishlist)) {
+            session()->flash('success', 'Product has already been added to wishlist!');
+        } else {
+            $wishlist[$id] = [
+                "title" => $product->title,
+                "price" => $product->price,
+                "image" => $product->image,
+                "description" => $product->description
+            ];
+            session()->put('wishlist', $wishlist);
+            session()->flash('success', 'Product has been added to wishlist!');
+        }
+
+        return redirect()->back();
+    }
+
+    public function deleteProductWishList(Request $request)
+    {
+        $productId = $request->id;
+        if ($productId) {
+            $wishlist = session()->get('wishlist', []);
+            if (isset($wishlist[$productId])) {
+                unset($wishlist[$productId]);
+                session()->put('wishlist', $wishlist);
+                session()->flash('success', 'Product successfully deleted from wishlist.');
+            }
+        }
+
+        return redirect()->route('wishlist');
+    }
+
 
 }

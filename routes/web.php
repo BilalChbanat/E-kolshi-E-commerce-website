@@ -73,11 +73,17 @@ Route::patch('/update-shopping-cart', [ProductController::class, 'updateCart'])-
 Route::delete('/delete-cart-product', [ProductController::class, 'deleteProduct'])->name('delete.cart.product');
 Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 
+// wishlist 
+Route::get('/wishlist', [ProductController::class, 'wishlist'])->name('wishlist');
+Route::get('/wishlist/{id}', [ProductController::class, 'addTowishlist'])->name('addproduct.to.wishlist');
+Route::delete('/wishlist/{id}', [ProductController::class, 'deleteProductWishList'])->name('wishlist.delete');
+
 //  Profile 
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 });
+
 
 // search and filter 
 

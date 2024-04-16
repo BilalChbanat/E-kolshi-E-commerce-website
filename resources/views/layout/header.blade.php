@@ -68,11 +68,11 @@
 
         <div class="flex">
             <div class="pl-4 pb-2 flex justify-center items-center">
-                <a href="#" class="relative py-2">
+                <a href="{{route('wishlist')}}" class="relative py-2">
                     <div class="t-0 absolute left-3">
                         <p
                             class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white mb-4">
-                            3
+                            {{ count((array) session('wishlist')) }}
                         </p>
                     </div>
                     <?xml version="1.0" encoding="iso-8859-1"?>
