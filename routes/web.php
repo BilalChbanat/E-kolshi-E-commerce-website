@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChekoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// speak about http methods and paths , Controllers and Actions(methods) et pro
 
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('/');
@@ -63,6 +65,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('dashboard.products.edit');
     Route::put('products/{id}/edit', [ProductController::class, 'update'])->name('dashboard.products.update');
     Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
+    //chekout
+    Route::get('chekout', [ChekoutController::class, 'index'])->name('chekout.index');
+
 });
 
 // cart 

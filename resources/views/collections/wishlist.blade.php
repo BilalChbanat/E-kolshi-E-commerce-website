@@ -1,55 +1,30 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="" id="content" data-global="true" data-path="global.0.0">
-        <h1 class="pl-12 text-2xl font-bold">Welcome to Your wishlist</h1>
-        <section data-section-id="1" data-share="" data-category="ecommerce-product-list" data-component-id="5278c31d_01_awz"
-            data-path="0">
-            <div class="pt-12 pb-24 2xl:pb-44 bg-blueGray-100" data-path="0.0">
-                <div class="container px-4 mx-auto" data-path="0.0.0">
-                    <div class="flex flex-wrap -mx-3 mb-20 " data-path="0.0.0.3">
-
-                        @foreach (session('wishlist') as $id => $details)
-                            <div class="w-[28rem] h-[25rem] p-6 flex flex-col m-8" data-aos="zoom-out">
-                                <a class="w-full h-full" href="{{ url('products/' . $id . '/detail') }}">
-                                    <img class="hover:grow hover:shadow-lg w-full h-[20rem]"
-                                        src="{{ asset($details['image']) }}">
-                                </a>
-                                <div class="pt-3 flex items-center justify-between">
-                                    <p class="">{{ $details['title'] }}</p>
-                                    <div class="flex">
-                                        <a class="px-4" href="{{ route('addproduct.to.cart', $id) }}">
-                                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="18px"
-                                                height="18px" viewBox="0 0 24 24" fill="none">
-                                                <path
-                                                    d="M21 5L19 12H7.37671M20 16H8L6 3H3M16 5.5H13.5M13.5 5.5H11M13.5 5.5V8M13.5 5.5V3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
-                                                    stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </a>
-                                        <form action="{{ route('wishlist.delete', $id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="px-4">
-                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="27"
-                                                    height="27" viewBox="0 0 64 64">
-                                                    <path
-                                                        d="M 26.9375 4 C 26.0435 4 25.203813 4.3940781 24.632812 5.0800781 C 24.574813 5.1490781 24.527234 5.2256406 24.490234 5.3066406 L 22.357422 10 L 11 10 C 9.346 10 8 11.346 8 13 L 8 19 C 8 20.654 9.346 22 11 22 L 13 22 L 13 57 C 13 58.654 14.346 60 16 60 L 48 60 C 49.654 60 51 58.654 51 57 L 51 22 L 53 22 C 54.654 22 56 20.654 56 19 L 56 13 C 56 11.346 54.654 10 53 10 L 41.644531 10 L 39.511719 5.3066406 C 39.474719 5.2256406 39.426141 5.1480781 39.369141 5.0800781 C 38.797141 4.3940781 37.957453 4 37.064453 4 L 26.9375 4 z M 26.9375 6 L 37.0625 6 C 37.3225 6 37.569906 6.1003437 37.753906 6.2773438 L 39.447266 10 L 24.552734 10 L 26.246094 6.2773438 C 26.431094 6.1003438 26.6775 6 26.9375 6 z M 11 12 L 53 12 C 53.551 12 54 12.448 54 13 L 54 19 C 54 19.552 53.551 20 53 20 L 11 20 C 10.449 20 10 19.552 10 19 L 10 13 C 10 12.448 10.449 12 11 12 z M 14 14 C 13.448 14 13 14.447 13 15 L 13 17 C 13 17.553 13.448 18 14 18 C 14.552 18 15 17.553 15 17 L 15 15 C 15 14.447 14.552 14 14 14 z M 19 14 C 18.448 14 18 14.447 18 15 L 18 17 C 18 17.553 18.448 18 19 18 C 19.552 18 20 17.553 20 17 L 20 15 C 20 14.447 19.552 14 19 14 z M 24 14 C 23.448 14 23 14.447 23 15 L 23 17 C 23 17.553 23.448 18 24 18 C 24.552 18 25 17.553 25 17 L 25 15 C 25 14.447 24.552 14 24 14 z M 29 14 C 28.448 14 28 14.447 28 15 L 28 17 C 28 17.553 28.448 18 29 18 C 29.552 18 30 17.553 30 17 L 30 15 C 30 14.447 29.552 14 29 14 z M 35 14 C 34.448 14 34 14.447 34 15 L 34 17 C 34 17.553 34.448 18 35 18 C 35.552 18 36 17.553 36 17 L 36 15 C 36 14.447 35.552 14 35 14 z M 40 14 C 39.448 14 39 14.447 39 15 L 39 17 C 39 17.553 39.448 18 40 18 C 40.552 18 41 17.553 41 17 L 41 15 C 41 14.447 40.552 14 40 14 z M 45 14 C 44.448 14 44 14.447 44 15 L 44 17 C 44 17.553 44.448 18 45 18 C 45.552 18 46 17.553 46 17 L 46 15 C 46 14.447 45.552 14 45 14 z M 50 14 C 49.448 14 49 14.447 49 15 L 49 17 C 49 17.553 49.448 18 50 18 C 50.552 18 51 17.553 51 17 L 51 15 C 51 14.447 50.552 14 50 14 z M 15 22 L 49 22 L 49 57 C 49 57.552 48.551 58 48 58 L 16 58 C 15.449 58 15 57.552 15 57 L 15 56 L 38 56 C 38.552 56 39 55.553 39 55 C 39 54.447 38.552 54 38 54 L 15 54 L 15 22 z M 20 28 C 19.448 28 19 28.447 19 29 L 19 41 C 19 41.553 19.448 42 20 42 C 20.552 42 21 41.553 21 41 L 21 29 C 21 28.447 20.552 28 20 28 z M 28 28 C 27.448 28 27 28.447 27 29 L 27 49 C 27 49.553 27.448 50 28 50 C 28.552 50 29 49.553 29 49 L 29 29 C 29 28.447 28.552 28 28 28 z M 36 28 C 35.448 28 35 28.447 35 29 L 35 49 C 35 49.553 35.448 50 36 50 C 36.552 50 37 49.553 37 49 L 37 29 C 37 28.447 36.552 28 36 28 z M 44 28 C 43.448 28 43 28.447 43 29 L 43 33 C 43 33.553 43.448 34 44 34 C 44.552 34 45 33.553 45 33 L 45 29 C 45 28.447 44.552 28 44 28 z M 44 36 C 43.448 36 43 36.447 43 37 L 43 49 C 43 49.553 43.448 50 44 50 C 44.552 50 45 49.553 45 49 L 45 37 C 45 36.447 44.552 36 44 36 z M 20 44 C 19.448 44 19 44.447 19 45 L 19 49 C 19 49.553 19.448 50 20 50 C 20.552 50 21 49.553 21 49 L 21 45 C 21 44.447 20.552 44 20 44 z M 42 54 C 41.448 54 41 54.447 41 55 C 41 55.553 41.448 56 42 56 L 46 56 C 46.552 56 47 55.553 47 55 C 47 54.447 46.552 54 46 54 L 42 54 z">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </div>
-
-                                </div>
-                                <p class="pt-1 text-gray-900">{{ $details['price'] }} MAD</p>
-                            </div>
-                        @endforeach
-
+    <div class="container mx-auto py-12">
+        <h1 class="text-2xl font-bold mb-8">Welcome to Your Wishlist</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            @foreach (session('wishlist') as $id => $details)
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <a href="{{ url('products/' . $id . '/detail') }}">
+                        <img class="w-full h-48 object-cover mb-4" src="{{ asset($details['image']) }}" alt="Product Image">
+                    </a>
+                    <p class="text-lg font-semibold mb-2">{{ $details['title'] }}</p>
+                    <p class="text-gray-700">{{ $details['price'] }} MAD</p>
+                    <div class="flex justify-between mt-4">
+                        <a href="{{ route('addproduct.to.cart', $id) }}" class="text-blue-500 hover:text-blue-700">
+                            Add to Cart
+                        </a>
+                        <form action="{{ route('wishlist.delete', $id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700">
+                                Remove
+                            </button>
+                        </form>
                     </div>
-
                 </div>
-            </div>
-        </section>
+            @endforeach
+        </div>
     </div>
 @endsection
