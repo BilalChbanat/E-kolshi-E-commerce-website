@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChekoutController;
 use App\Http\Controllers\DashboardController;
@@ -65,18 +66,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('dashboard.products.edit');
     Route::put('products/{id}/edit', [ProductController::class, 'update'])->name('dashboard.products.update');
     Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
+    
     //chekout
     Route::get('chekout', [ChekoutController::class, 'index'])->name('chekout.index');
 
+    //cart
+    Route::get('cart', [CartController::class, 'index'])->name('shop.cart');
+    Route::post('cart/{id}/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+
 });
 
-// cart 
-
-Route::get('/shopping-cart', [ProductController::class, 'productCart'])->name('shopping.cart');
-Route::get('/product/{id}', [ProductController::class, 'addProducttoCart'])->name('addproduct.to.cart');
-Route::patch('/update-shopping-cart', [ProductController::class, 'updateCart'])->name('update.shopping.cart');
-Route::delete('/delete-cart-product', [ProductController::class, 'deleteProduct'])->name('delete.cart.product');
-Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 
 // wishlist 
 Route::get('/wishlist', [ProductController::class, 'wishlist'])->name('wishlist');

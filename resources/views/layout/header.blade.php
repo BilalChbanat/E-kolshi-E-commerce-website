@@ -93,7 +93,7 @@
                 </a>
             </div>
             <div class="pl-4 pb-2 flex justify-center items-center">
-                <a href="{{route('shopping.cart')}}" class="relative py-2">
+                <a href="#" class="relative py-2">
                     <div class="t-0 absolute left-3">
                         <p
                             class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
