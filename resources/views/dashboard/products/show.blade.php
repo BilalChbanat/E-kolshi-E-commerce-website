@@ -54,7 +54,7 @@
                         <button type="button"
                             class="min-w-[200px] px-4 py-3 bg-[#333] hover:bg-[#111] text-white text-sm font-bold rounded">Buy
                             now</button>
-                        <a href="{{ route('addproduct.to.cart', $product->id) }}"
+                        <a href="{{ route('cart.add', $product->id) }}"
                             class="min-w-[200px] pl-[3.3rem] py-2.5 border border-[#333] bg-transparent hover:bg-gray-50 text-[#333] text-sm font-bold rounded">Add
                             to cart</a>
                     </div>

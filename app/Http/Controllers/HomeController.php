@@ -17,6 +17,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
+        $carts = $user->carts;
+        $cartCount = $carts->count();
         // Get the selected category from the request, defaulting to 'all' if not present
         $selectedCategory = $request->query('category', 'all');
 
@@ -31,7 +33,7 @@ class HomeController extends Controller
         })->paginate(10);
 
         // Pass user, products, categories, and selectedCategory to the view
-        return view('welcome', compact('user', 'products', 'categories', 'selectedCategory'));
+        return view('welcome', compact('user', 'products', 'categories', 'selectedCategory', 'cartCount'));
     }
 
     public function showProducts(Request $request)
@@ -58,37 +60,7 @@ class HomeController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    
 
     /**
      * Remove the specified resource from storage.

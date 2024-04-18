@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +16,9 @@ class CartController extends Controller
     {
         $user = Auth::user();
         $carts = $user->carts;
+        $cartCount = $carts->count();
 
-        return view('shop.cart', compact('carts', 'user'));
+        return view('shop.cart', compact('carts', 'user', 'cartCount'));
     }
 
 
@@ -51,19 +53,24 @@ class CartController extends Controller
     /**
      * Update the quantity of a product in the shopping cart.
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, int $id)
     {
-        $cart->update(['quantity' => $request->quantity]);
+        $cart = Cart::findOrFail($id);
+        $cart->quantity = $request->quantity; 
+        $cart->save(); 
 
         return redirect()->route('shop.cart')->with('success', 'Cart updated successfully');
     }
 
+
+
     /**
      * Remove a product from the shopping cart.
      */
-    public function remove(Cart $cart)
+    public function remove($id)
     {
-        $cart->delete();
+        $product = Product::findOrFail($id);
+        $product->delete();
 
         return redirect()->route('shop.cart')->with('success', 'Product removed from cart successfully');
     }

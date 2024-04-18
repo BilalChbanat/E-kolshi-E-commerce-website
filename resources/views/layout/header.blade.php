@@ -47,7 +47,7 @@
                 <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 shadow-md rounded-lg p-2 bg-white  border-gray-700 divide-gray-700"
                     aria-labelledby="hs-dropdown-basic">
                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black  focus:outline-none  hover:text-black"
-                        href="{{ route('profile.show',$user->id) }}">
+                        href="{{ route('profile.show', $user->id) }}">
                         Profile
                     </a>
                     <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black  focus:outline-none  hover:text-black"
@@ -68,7 +68,7 @@
 
         <div class="flex">
             <div class="pl-4 pb-2 flex justify-center items-center">
-                <a href="{{route('wishlist')}}" class="relative py-2">
+                <a href="{{ route('wishlist') }}" class="relative py-2">
                     <div class="t-0 absolute left-3">
                         <p
                             class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white mb-4">
@@ -93,11 +93,15 @@
                 </a>
             </div>
             <div class="pl-4 pb-2 flex justify-center items-center">
-                <a href="#" class="relative py-2">
+                <a href="{{ route('shop.cart') }}" class="relative py-2">
                     <div class="t-0 absolute left-3">
                         <p
                             class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-                            {{ count((array) session('cart')) }}
+                            @isset($cartCount)
+                                {{ $cartCount }}
+                            @else
+                                0
+                            @endisset
                         </p>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

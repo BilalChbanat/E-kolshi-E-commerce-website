@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -231,7 +232,7 @@
                                     class="text-white absolute end-2.5 bottom-2.5  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Search</button>
                             </div>
                         </div>
-                        {{-- end Search  --}}
+                        {{-- end Search --}}
                         {{-- filter --}}
                         <div class="mt-6 ml-4 ">
                             <div class="hs-dropdown relative inline-flex">
@@ -264,9 +265,9 @@
                     </div>
                 </div>
             </nav>
-            <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12" id="place_result">
+            <div class="container mx-auto flex justify-center items-center flex-wrap pt-4 pb-12" id="place_result">
                 @foreach ($products as $item)
-                    <div class="w-[28rem] h-[25rem] p-6 flex flex-col m-8" data-aos="zoom-out">
+                    <div class="w-[28rem] h-[25rem] p-6 flex flex-col" data-aos="zoom-out">
                         <a class="w-full h-full" href="{{ url('products/' . $item->id . '/detail') }}">
                             <img class="hover:grow hover:shadow-lg w-full h-[20rem]" src="{{ asset($item->image) }}">
                         </a>
@@ -282,7 +283,7 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </a>
-                                <a href="{{ route('addproduct.to.wishlist', $item->id) }}">
+                                <a href="{{ route('cart.remove', $item->id) }}">
                                     <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
