@@ -61,7 +61,7 @@
         </header>
         <h1 class="pl-8 pt-8 text-[2rem] text-gray-700">Add Product</h1>
         <div class="p-6 overflow-scroll px-0">
-            <a href="{{ route('dashboard.products.index') }}"
+            <a href="{{ url('products')}}"
                 class="ml-6 text-[.75rem] p-2 text-gray-500 border-b border-dotted">
                 <- Back to previous page </a>
                     @if (session('status'))

@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
 
-    public function __construct()
-    {
-        // Apply the 'admin' middleware to the entire controller
-        $this->middleware('admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('admin');
+    //     $this->middleware('seller');
+    // }
+
 
 
     /**

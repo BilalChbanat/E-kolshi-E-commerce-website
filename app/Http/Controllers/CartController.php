@@ -14,11 +14,18 @@ class CartController extends Controller
      */
     public function index()
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
         $user = Auth::user();
+        
         $carts = $user->carts;
         $cartCount = $carts->count();
 
-        return view('shop.cart', compact('carts', 'user', 'cartCount'));
+        $wishlistItems = $user->wishlistItems;
+        $wishlistCount = $wishlistItems->count();
+
+        return view('shop.cart', compact('carts', 'user', 'cartCount','wishlistCount'));
     }
 
 
@@ -27,6 +34,9 @@ class CartController extends Controller
      */
     public function add(int $id)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
         $productId = $id;
         $quantity = 1;
 
@@ -55,9 +65,12 @@ class CartController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
         $cart = Cart::findOrFail($id);
-        $cart->quantity = $request->quantity; 
-        $cart->save(); 
+        $cart->quantity = $request->quantity;
+        $cart->save();
 
         return redirect()->route('shop.cart')->with('success', 'Cart updated successfully');
     }
@@ -69,9 +82,13 @@ class CartController extends Controller
      */
     public function remove($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
+        $cartItem = Cart::findOrFail($id);
+        $cartItem->delete();
 
         return redirect()->route('shop.cart')->with('success', 'Product removed from cart successfully');
     }
+
 }

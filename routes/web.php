@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('/');
 
+
+
 //auth
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::get('/register', [AuthController::class, 'index'])->name('register');
@@ -44,7 +46,18 @@ Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.sh
 
 // Dashboard 
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::group(['middleware' => ['auth', 'checkrole:admin,seller']], function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('products', [ProductController::class, 'index'])->name('dashboard.products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('dashboard.products.create');
+
+    Route::post('products/create', [ProductController::class, 'store'])->name('dashboard.products.store'); // Changed the route name to avoid conflict
+
+    Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('dashboard.products.edit');
+    Route::put('products/{id}/edit', [ProductController::class, 'update'])->name('dashboard.products.update');
+    Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
+});
 
 //Product details
 Route::get('products/{id}/detail', [ProductController::class, 'show'])->name('dashboard.products.show');
@@ -61,13 +74,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 //products
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('products', [ProductController::class, 'index'])->name('dashboard.products.index');
-    Route::get('products/create', [ProductController::class, 'create'])->name('dashboard.products.create');
-    Route::post('products/create', [ProductController::class, 'store'])->name('dashboard.products.create');
-    Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('dashboard.products.edit');
-    Route::put('products/{id}/edit', [ProductController::class, 'update'])->name('dashboard.products.update');
-    Route::get('products/{id}/delete', [ProductController::class, 'destroy'])->name('dashboard.products.delete');
-    
+
     //chekout
     Route::get('chekout', [ChekoutController::class, 'index'])->name('chekout.index');
 
@@ -82,20 +89,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('wishlist/{id}/add', [WishListController::class, 'add'])->name('wishlist.add');
     Route::get('wishlist/{id}/remove', [WishListController::class, 'remove'])->name('wishlist.remove');
 
+    //profile 
+    Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+
 });
 
-//Profile 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
-});
+
 
 
 //search and filter 
-Route::get('/products', [HomeController::class, 'index'])->name('products.filter.index');
+Route::get('/products/filter', [HomeController::class, 'index'])->name('products.filter.index');
 Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.products.search');
 
-Route::put('/post/{id}', function (string $id) {
-    // ...
-})->middleware('role:editor');
+
 
 

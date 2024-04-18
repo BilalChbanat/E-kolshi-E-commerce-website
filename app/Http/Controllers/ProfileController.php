@@ -14,7 +14,8 @@ class ProfileController extends Controller
     public function show(string $id)
     {
         $user = Auth::user();
-        return view('profile.show', compact('user'));
+        $products = $user->products();
+        return view('profile.show', compact('user', 'products'));
     }
 
     /**

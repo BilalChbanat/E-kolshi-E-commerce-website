@@ -29,14 +29,40 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect('/');
         }
-        return view('auth.register');
+
+        $user = Auth::user();
+        $cartCount = 0;
+        $wishlistCount = 0;
+
+        if ($user) {
+            $carts = $user->carts;
+            $cartCount = $carts->count();
+
+            $wishlistItems = $user->wishlistItems;
+            $wishlistCount = $wishlistItems->count();
+        }
+
+        return view('auth.register', compact('wishlistCount', 'cartCount'));
     }
     public function loginForm()
     {
         if (Auth::check()) {
             return redirect('/');
         }
-        return view('auth.login');
+
+        $user = Auth::user();
+        $cartCount = 0;
+        $wishlistCount = 0;
+
+        if ($user) {
+            $carts = $user->carts;
+            $cartCount = $carts->count();
+
+            $wishlistItems = $user->wishlistItems;
+            $wishlistCount = $wishlistItems->count();
+        }
+
+        return view('auth.login', compact('wishlistCount', 'cartCount'));
     }
 
     public function login(Request $request)
@@ -75,9 +101,9 @@ class AuthController extends Controller
             'address' => 'required|max:255|string',
         ]);
 
-        if($request->has('seller')){
+        if ($request->has('seller')) {
             $roleUser = Role::where('name', 'seller')->first();
-        }else{
+        } else {
             $roleUser = Role::where('name', 'user')->first();
         }
 
@@ -86,7 +112,7 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'postal_code' => $request->input('postal_code'),
             'country' => $request->input('country'),
-            'city' => $request->input('city'), 
+            'city' => $request->input('city'),
             'address' => $request->input('address'),
             'role_id' => $roleUser->id,
             'password' => Hash::make($request->input('password')),
@@ -106,29 +132,32 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    function forgotpassword(){
+    function forgotpassword()
+    {
         return view('auth.forgot');
     }
 
-    function postforgotpassword(Request $request){
+    function postforgotpassword(Request $request)
+    {
         $user = User::getEmailsingle($request->email);
-        if(!empty($user)){
+        if (!empty($user)) {
             $user->remember_token = Str::random(30);
             $user->save();
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
             return back()->with('success', 'please chek you email and rest your passworde');
-        }else{
+        } else {
             return back()->with('error', 'Email not found');
         }
     }
 
-    public function reset($remember_token){
+    public function reset($remember_token)
+    {
         $user = User::getTokenSingle($remember_token);
-        if(!empty($user)){
+        if (!empty($user)) {
             $data['token'] = $remember_token;
             $data['user'] = $user;
             return view('auth.reset', $data);
-        }else{
+        } else {
             abort(404);
         }
     }

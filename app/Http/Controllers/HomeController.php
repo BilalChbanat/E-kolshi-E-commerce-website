@@ -16,28 +16,31 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        $cartCount = 0;
+        $wishlistCount = 0;
 
-        $carts = $user->carts;
-        $cartCount = $carts->count();
-        // Get the selected category from the request, defaulting to 'all' if not present
+        if ($user) {
+            $carts = $user->carts;
+            $cartCount = $carts->count();
+
+            $wishlistItems = $user->wishlistItems;
+            $wishlistCount = $wishlistItems->count();
+        }
+
         $selectedCategory = $request->query('category', 'all');
-
-        $wishlistItems = $user->wishlistItems;
-        $wishlistCount = $wishlistItems->count();
-
-        // Fetch all categories
         $categories = Category::all(); // Assuming you have a Category model
 
-        // Query products based on the selected category
-        $products = Product::when($selectedCategory != 'all', function ($query) use ($selectedCategory) {
-            $query->whereHas('category', function ($q) use ($selectedCategory) {
+        $productsQuery = Product::query();
+        if ($selectedCategory !== 'all') {
+            $productsQuery->whereHas('category', function ($q) use ($selectedCategory) {
                 $q->where('id', $selectedCategory);
             });
-        })->paginate(10);
+        }
+        $products = $productsQuery->paginate(10);
 
-        // Pass user, products, categories, and selectedCategory to the view
         return view('welcome', compact('user', 'products', 'categories', 'selectedCategory', 'cartCount', 'wishlistCount'));
     }
+
 
     public function showProducts(Request $request)
     {

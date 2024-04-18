@@ -214,7 +214,7 @@
 
                     <div class="flex w-full justify-center items-center">
                         {{-- Search  --}}
-                        <div class="w-[30rem]  bg-gray-900 mt-7">
+                        {{-- <div class="w-[30rem]  bg-gray-900 mt-7">
                             <label for="default-search"
                                 class="mb-2 text-sm font-medium  sr-only text-white">Search</label>
                             <div class="relative">
@@ -231,14 +231,36 @@
                                 <button type="submit"
                                     class="text-white absolute end-2.5 bottom-2.5  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Search</button>
                             </div>
+                        </div> --}}
+                        {{-- ------------------------------- --}}
+                        <div class="relative flex border w-2/6 rounded-md" data-twe-input-wrapper-init data-twe-input-group-ref>
+                            <input type="search" id="search"
+                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.5rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
+                                placeholder="Search Mockups, Logos..." aria-label="Search" id="search-focus"
+                                aria-describedby="basic-addon4" />
+                            <label for="search-focus"
+                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none ">Search
+                            </label>
+                            <button
+                                class="relative z-[2] -ms-0.5 flex items-center rounded-e bg-primary px-5  text-xs font-medium uppercase leading-normal text-black shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 "
+                                type="button" id="button-addon4" data-twe-ripple-init data-twe-ripple-color="light">
+                                <span class="[&>svg]:h-5 [&>svg]:w-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                    </svg>
+                                </span>
+                            </button>
                         </div>
+                        {{-- ------------------------------- --}}
                         {{-- end Search --}}
                         {{-- filter --}}
-                        <div class="mt-6 ml-4 ">
+                        <div class=" ml-4 ">
                             <div class="hs-dropdown relative inline-flex">
                                 <button id="hs-dropdown-basic" type="button"
                                     class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-gray-900 text-gray-300 shadow-sm hover:bg-gray-8000 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                    Filter
+                                    Filter <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
                                     <svg class="hs-dropdown-open:rotate-180 size-4 text-gray-600"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -255,7 +277,7 @@
                                     </a>
                                     @foreach ($categories as $item)
                                         <a class="{{ $selectedCategory == $item->id ? 'font-bold' : '' }} flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 hover:bg-gray-800 focus:outline-none hover:text-gray-300 focus:bg-gray-700"
-                                            href="{{ url('/products?category=' . $item->id) }}">
+                                            href="{{ url('/products/filter?category=' . $item->id) }}">
                                             {{ $item->name }}
                                         </a>
                                     @endforeach
@@ -290,6 +312,8 @@
                                             d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
                                     </svg>
                                 </a>
+
+
                             </div>
                         </div>
                         <p class="pt-1 text-gray-900">{{ $item->price }} MAD</p>
@@ -325,6 +349,52 @@
     </script>
     <script>
         AOS.init();
+    </script>
+    <script>
+        // Initialization for ES Users
+        import {
+            Ripple,
+            Input,
+            initTWE,
+        } from "tw-elements";
+
+        initTWE({
+            Ripple,
+            Input
+        });
+
+        const searchFocus = document.getElementById('search-focus');
+        const keys = [{
+                keyCode: 'AltLeft',
+                isTriggered: false
+            },
+            {
+                keyCode: 'ControlLeft',
+                isTriggered: false
+            },
+        ];
+
+        window.addEventListener('keydown', (e) => {
+            keys.forEach((obj) => {
+                if (obj.keyCode === e.code) {
+                    obj.isTriggered = true;
+                }
+            });
+
+            const shortcutTriggered = keys.filter((obj) => obj.isTriggered).length === keys.length;
+
+            if (shortcutTriggered) {
+                searchFocus.focus();
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            keys.forEach((obj) => {
+                if (obj.keyCode === e.code) {
+                    obj.isTriggered = false;
+                }
+            });
+        });
     </script>
 @endsection
 @section('title', 'Home')

@@ -11,11 +11,17 @@ class WishListController extends Controller
 {
     public function index()
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
         $user = Auth::user();
         $wishlistItems = $user->wishlistItems;
         $wishlistCount = $wishlistItems->count();
 
-        return view('shop.wishlist', compact('wishlistItems', 'user', 'wishlistCount'));
+        $carts = $user->carts;
+        $cartCount = $carts->count();
+
+        return view('shop.wishlist', compact('wishlistItems', 'user', 'wishlistCount', 'cartCount'));
     }
 
 
@@ -24,6 +30,10 @@ class WishListController extends Controller
      */
     public function add(int $id)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
+
         $productId = $id;
 
         $existingItem = WishList::where('product_id', $productId)
@@ -43,14 +53,19 @@ class WishListController extends Controller
     }
 
 
+
     /**
      * Remove a product from the wishlist.
      */
     public function remove($id)
     {
-        $wishlistItem = WishList::findOrFail($id);
-        $wishlistItem->delete();
 
-        return redirect()->route('shop.wishlist')->with('success', 'Product removed from wishlist successfully');
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
+        }
+        $wishlistProduct = WishList::findOrFail($id);
+        $wishlistProduct->delete();
+
+        return redirect()->route('shop.wishlist')->with('success', 'Product removed from cart successfully');
     }
 }

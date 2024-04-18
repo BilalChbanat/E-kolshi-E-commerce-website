@@ -4,13 +4,13 @@
             class="w-64 absolute sm:relative bg-blue-100 shadow md:h-full flex-col justify-between hidden sm:flex">
             <div class="px-8">
                 <div class="h-16 w-full flex items-center mt-[1rem]">
-                    <a href="{{route('/')}}">
-                    <img src="{{ asset('./images/e-kolshi-logo-removebg-preview.png') }}" alt="E-kolshi">
+                    <a href="{{ route('/') }}">
+                        <img src="{{ asset('./images/e-kolshi-logo-removebg-preview.png') }}" alt="E-kolshi">
                     </a>
                 </div>
                 <ul class="mt-12">
                     <li class="flex w-full justify-between text-gray-800 cursor-pointer items-center mb-6">
-                        <a href="{{route('dashboard.index')}}" class="flex items-center ">
+                        <a href="{{ route('dashboard.index') }}" class="flex items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid"
                                 width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -22,11 +22,11 @@
                             </svg>
                             <span class="text-sm ml-2">Dashboard</span>
                         </a>
-                        
+
                     </li>
                     <li
                         class="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-6">
-                        <a href="{{route('dashboard.products.index')}}" class="flex items-center ">
+                        <a href="{{ url('products') }}" class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle"
                                 width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -39,11 +39,13 @@
                         </a>
                         <div
                             class="py-1 px-3 bg-blue-400 rounded text-gray-800 flex items-center justify-center text-xs">
-                            8</div>
+                            8
+                        </div>
                     </li>
+
                     <li
                         class="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-6">
-                        <a href="{{route('dashboard.categories.index')}}" class="flex items-center ">
+                        <a href="{{ route('dashboard.categories.index') }}" class="flex items-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass"
                                 width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
