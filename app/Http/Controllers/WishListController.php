@@ -5,62 +5,52 @@ namespace App\Http\Controllers;
 use App\Models\WishList;
 use App\Http\Requests\StoreWishListRequest;
 use App\Http\Requests\UpdateWishListRequest;
+use Illuminate\Support\Facades\Auth;
 
 class WishListController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $wishlistItems = $user->wishlistItems;
+        $wishlistCount = $wishlistItems->count();
+
+        return view('shop.wishlist', compact('wishlistItems', 'user', 'wishlistCount'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * Add a product to the wishlist.
      */
-    public function store(StoreWishListRequest $request)
+    public function add(int $id)
     {
-        //
+        $productId = $id;
+
+        $existingItem = WishList::where('product_id', $productId)
+            ->where('user_id', auth()->id())
+            ->first();
+
+        if ($existingItem) {
+            return redirect()->route('shop.wishlist')->with('error', 'Product already exists in wishlist');
+        } else {
+            $wishlistItem = new WishList();
+            $wishlistItem->user_id = auth()->id();
+            $wishlistItem->product_id = $productId;
+            $wishlistItem->save();
+        }
+
+        return redirect()->route('shop.wishlist')->with('success', 'Product added to wishlist successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(WishList $wishList)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove a product from the wishlist.
      */
-    public function edit(WishList $wishList)
+    public function remove($id)
     {
-        //
-    }
+        $wishlistItem = WishList::findOrFail($id);
+        $wishlistItem->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateWishListRequest $request, WishList $wishList)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(WishList $wishList)
-    {
-        //
+        return redirect()->route('shop.wishlist')->with('success', 'Product removed from wishlist successfully');
     }
 }

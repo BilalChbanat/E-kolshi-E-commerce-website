@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,23 +77,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::get('cart/{id}/remove', [CartController::class, 'remove'])->name('cart.remove');
 
+    //wishList
+    Route::get('wishlist', [WishListController::class, 'index'])->name('shop.wishlist');
+    Route::get('wishlist/{id}/add', [WishListController::class, 'add'])->name('wishlist.add');
+    Route::get('wishlist/{id}/remove', [WishListController::class, 'remove'])->name('wishlist.remove');
+
 });
 
-
-// wishlist 
-Route::get('/wishlist', [ProductController::class, 'wishlist'])->name('wishlist');
-Route::get('/wishlist/{id}', [ProductController::class, 'addTowishlist'])->name('addproduct.to.wishlist');
-Route::delete('/wishlist/{id}', [ProductController::class, 'deleteProductWishList'])->name('wishlist.delete');
-
-//  Profile 
-
+//Profile 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 
-// search and filter 
-
+//search and filter 
 Route::get('/products', [HomeController::class, 'index'])->name('products.filter.index');
 Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.products.search');
 

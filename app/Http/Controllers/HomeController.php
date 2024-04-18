@@ -22,6 +22,9 @@ class HomeController extends Controller
         // Get the selected category from the request, defaulting to 'all' if not present
         $selectedCategory = $request->query('category', 'all');
 
+        $wishlistItems = $user->wishlistItems;
+        $wishlistCount = $wishlistItems->count();
+
         // Fetch all categories
         $categories = Category::all(); // Assuming you have a Category model
 
@@ -33,7 +36,7 @@ class HomeController extends Controller
         })->paginate(10);
 
         // Pass user, products, categories, and selectedCategory to the view
-        return view('welcome', compact('user', 'products', 'categories', 'selectedCategory', 'cartCount'));
+        return view('welcome', compact('user', 'products', 'categories', 'selectedCategory', 'cartCount', 'wishlistCount'));
     }
 
     public function showProducts(Request $request)
