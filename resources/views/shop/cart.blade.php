@@ -44,10 +44,12 @@
                                         </tr>
                                     </thead>
                                     <tbody class="whitespace-nowrap divide-y">
-                                        <form action="#" method="post">
-                                            @csrf
-                                            @php $total = 0 @endphp
-                                            @foreach ($carts as $cart)
+
+                                        @php $total = 0 @endphp
+                                        @foreach ($carts as $cart)
+                                            <form action="{{ route('cart.update', $cart->id) }}" method="post">
+                                                @csrf
+                                                @method('PUT')
                                                 <tr rowId="{{ $cart->id }}">
                                                     <td class="py-6 px-4">
                                                         <div class="flex items-center gap-6 w-max">
@@ -67,15 +69,20 @@
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <input type="number" name="quantity"
-                                                            class="w-12  text-center border-0 rounded-md bg-gray-50  md:text-right edit-cart-info"
-                                                            value="{{ $cart->quantity }}" min="1">
+                                                        <button type="submit">
+                                                            <input type="number" name="quantity"
+                                                                class="w-12  text-center border-0 rounded-md bg-gray-50  md:text-right edit-cart-info"
+                                                                value="{{ $cart->quantity }}" min="1">
+                                                        </button>
                                                     </td>
 
                                                     <td class="py-6 px-4">
                                                         <a href="{{ route('cart.remove', $cart->id) }}"
-                                                            class="mx-8 btn btn-outline-danger btn-sm delete-product"><i
-                                                                class="fa fa-trash-o"></i></a>
+                                                            class="mx-8 btn btn-outline-danger btn-sm delete-product"
+                                                            onclick="return confirm('Are you sure you want to delete this item?')">
+                                                            <i class="fa-solid fa-trash" style="color: #d22525;"></i>
+                                                        </a>
+
                                                     </td>
 
                                                     <td class="py-6 px-4 subtotal">
@@ -88,8 +95,8 @@
                                                         $total += $subtotal;
                                                     @endphp
                                                 </tr>
-                                            @endforeach
-                                        </form>
+                                            </form>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             @endif
@@ -114,7 +121,7 @@
                                 <li class="flex flex-wrap gap-4 text-md py-3 font-bold">Total <span
                                         class="ml-auto font-bold" id="total">
                                         @isset($total)
-                                            {{ $total }} MAD
+                                            {{ $total }}
                                         @else
                                             0
                                         @endisset
@@ -145,7 +152,9 @@
                     url: $(this).attr('action'),
                     method: 'POST',
                     data: formData,
-                    
+                    success: function(response) {
+                        updateTotal(); // Update total after successful form submission
+                    }
                 });
             });
 
@@ -167,19 +176,10 @@
                         var price = parseFloat(row.find('.price').text().trim());
                         var subtotal = price * quantity;
                         row.find('.subtotal').text(subtotal.toFixed(2) + ' MAD');
-
-                        var total = 0;
-                        $('.subtotal').each(function() {
-                            total += parseFloat($(this).text());
-                        });
-                        $('#subtotal').text(total.toFixed(2) + ' MAD');
-                        $('#total').text(total.toFixed(2) + ' MAD');
-                    },
-                    
+                        updateTotal(); // Update total after successful quantity update
+                    }
                 });
             });
-
-
 
             $('.delete-product').click(function() {
                 var row = $(this).closest('tr');
@@ -193,8 +193,17 @@
                 $('#total').text(total.toFixed(2) + ' MAD');
 
                 row.remove();
+                updateTotal(); // Update total after successful item deletion
             });
 
+            function updateTotal() {
+                var total = 0;
+                $('.subtotal').each(function() {
+                    total += parseFloat($(this).text());
+                });
+                $('#subtotal').text(total.toFixed(2) + ' MAD');
+                $('#total').text(total.toFixed(2) + ' MAD');
+            }
         });
     </script>
 @endsection

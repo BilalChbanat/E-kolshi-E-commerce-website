@@ -68,7 +68,9 @@ class CartController extends Controller
         if (!auth()->check()) {
             return redirect()->route('login')->with('error', 'Please log in to add products to your wishlist.');
         }
-        $cart = Cart::findOrFail($id);
+
+        $cart = Cart::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+
         $cart->quantity = $request->quantity;
         $cart->save();
 

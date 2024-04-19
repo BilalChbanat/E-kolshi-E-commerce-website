@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 Route::group(['middleware' => ['auth']], function () {
 
     //chekout
-    Route::get('chekout', [ChekoutController::class, 'index'])->name('chekout.index');
+    Route::get('checkout', [ChekoutController::class, 'index'])->name('chekout.index');
 
     //cart
     Route::get('cart', [CartController::class, 'index'])->name('shop.cart');
