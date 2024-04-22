@@ -6,8 +6,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChekoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MollieController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -75,9 +79,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 //products
 Route::group(['middleware' => ['auth']], function () {
 
-    //chekout
-    Route::get('checkout', [ChekoutController::class, 'index'])->name('chekout.index');
-
     //cart
     Route::get('cart', [CartController::class, 'index'])->name('shop.cart');
     Route::get('cart/{id}/add', [CartController::class, 'add'])->name('cart.add');
@@ -92,6 +93,13 @@ Route::group(['middleware' => ['auth']], function () {
     //profile 
     Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
+    //payment
+    Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::post('/session', [PaymentController::class, 'session'])->name('session');
+    // Route::get('/success/{total}', [PaymentController::class, 'success'])->name('success');
+    Route::post('/pay', [PaymentController::class, 'pay'])->name('pay.order');
+    Route::get('/success/{total}', [PaymentController::class, 'success'])->name('pay.success');
+
 });
 
 
@@ -100,6 +108,9 @@ Route::group(['middleware' => ['auth']], function () {
 //search and filter 
 Route::get('/products/filter', [HomeController::class, 'index'])->name('products.filter.index');
 Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.products.search');
+
+
+
 
 
 

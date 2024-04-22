@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'seller' => \App\Http\Middleware\SellerMiddleware::class,
         // 'checkRole' => \App\Http\Middleware\CheckRole::class,
         'checkrole' => \App\Http\Middleware\CheckRole::class,
+        'clearsession' => \App\Http\Middleware\Clearsession::class,
     ];
 }

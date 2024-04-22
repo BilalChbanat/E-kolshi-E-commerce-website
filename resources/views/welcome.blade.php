@@ -233,7 +233,7 @@
                             </div>
                         </div> --}}
                         {{-- ------------------------------- --}}
-                        <div class="relative flex border w-2/6 rounded-md" data-twe-input-wrapper-init data-twe-input-group-ref>
+                        <div class="relative flex border w-2/6 rounded-md">
                             <input type="search" id="search"
                                 class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.5rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
                                 placeholder="Search Mockups, Logos..." aria-label="Search" id="search-focus"
@@ -260,7 +260,11 @@
                             <div class="hs-dropdown relative inline-flex">
                                 <button id="hs-dropdown-basic" type="button"
                                     class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-gray-900 text-gray-300 shadow-sm hover:bg-gray-8000 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                    Filter <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+                                    Filter <svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#ffffff"
+                                            d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z" />
+                                    </svg>
                                     <svg class="hs-dropdown-open:rotate-180 size-4 text-gray-600"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -393,6 +397,25 @@
                 if (obj.keyCode === e.code) {
                     obj.isTriggered = false;
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#search").keyup(function() {
+                var input = $(this).val();
+                if (input == " ") input = 'all';
+                $.ajax({
+                    url: "/search",
+                    method: "POST",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        keyword: input
+                    },
+                    success: function(data) {
+                        $("#place_result").html(data);
+                    }
+                });
             });
         });
     </script>

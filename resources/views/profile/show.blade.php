@@ -74,7 +74,12 @@
     </section>
     <div class="border  mt-4 w-[85%] mx-auto justify-center items-center text-center"></div>
     <div>
-        <h2 class="text-2xl md:text-3xl mt-6 ml-[8rem] lg:text-4xl font-bold text-green-900">My Products</h2>
+        @if (auth()->user()->role_id == 2)
+            <h2 class="text-2xl md:text-3xl mt-6 ml-[8rem] lg:text-4xl font-bold text-green-900">My Purchases</h2>
+        @else
+            <h2 class="text-2xl md:text-3xl mt-6 ml-[8rem] lg:text-4xl font-bold text-green-900">My Products</h2>
+        @endif
+
         <div class="flex flex-wrap">
             @isset($products)
                 @forelse ($products as $item)

@@ -22,14 +22,14 @@
                              <div class="w-full lg:w-1/2 ">
                                  <label for="firstName" class="block mb-3 text-sm font-semibold text-gray-500">Last
                                      Name</label>
-                                 <input name="Last Name" type="text" placeholder="Last Name"
+                                 <input name="firstname" type="text" placeholder="Last Name"
                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
                              </div>
                          </div>
                          <div class="mt-4">
                              <div class="w-full">
                                  <label for="Email" class="block mb-3 text-sm font-semibold text-gray-500">Email</label>
-                                 <input name="Last Name" type="text" placeholder="Email"
+                                 <input name="lastname" type="text" placeholder="Email"
                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
                              </div>
                          </div>
@@ -39,7 +39,7 @@
                                      class="block mb-3 text-sm font-semibold text-gray-500">Address</label>
                                  <textarea
                                      class="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-                                     name="Address" cols="20" rows="4" placeholder="Address"></textarea>
+                                     name="address" cols="20" rows="4" placeholder="Address"></textarea>
                              </div>
                          </div>
                          <div class="space-x-0 lg:flex lg:space-x-4">
@@ -55,12 +55,7 @@
                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
                              </div>
                          </div>
-                         <div class="flex items-center mt-4">
-                             <label class="flex items-center text-sm group text-heading">
-                                 <input type="checkbox"
-                                     class="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:ring-1">
-                                 <span class="ml-2">Save this information for next time</span></label>
-                         </div>
+                         
                          <div class="relative pt-3 xl:pt-6"><label for="note"
                                  class="block mb-3 text-sm font-semibold text-gray-500"> Notes
                                  (Optional)</label>

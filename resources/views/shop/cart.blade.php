@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('content')
+
     @if ($carts->isEmpty())
         <div class="relative z-10">
 
@@ -25,8 +26,10 @@
                 </div>
             </div>
         @else
+        
             <div class="font-[sans-serif] bg-white py-4">
                 <div class="font-[sans-serif] bg-white py-4">
+
                     <div class="max-w-7xl mx-auto">
                         <h2 class="text-3xl font-extrabold text-[#333]">Shopping Cart</h2>
                         <div class="overflow-x-auto">
@@ -46,7 +49,7 @@
                                     <tbody class="whitespace-nowrap divide-y">
 
                                         @php $total = 0 @endphp
-                                        @foreach ($carts as $cart)
+                                         @foreach ($carts as $cart)
                                             <form action="{{ route('cart.update', $cart->id) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
@@ -96,8 +99,8 @@
                                                     @endphp
                                                 </tr>
                                             </form>
-                                        @endforeach
-                                    </tbody>
+                                        @endforeach 
+                                     </tbody>
                                 </table>
                             @endif
 
@@ -111,7 +114,7 @@
                                         @else
                                             0
                                         @endisset
-                                    </span></li>
+                                     </span></li>
                                 <li class="flex flex-wrap gap-4 text-md py-3">Shipping <span class="ml-auto font-bold">0.00
                                         MAD</span>
                                 </li>
@@ -119,7 +122,7 @@
                                         MAD</span>
                                 </li>
                                 <li class="flex flex-wrap gap-4 text-md py-3 font-bold">Total <span
-                                        class="ml-auto font-bold" id="total">
+                                        class="ml-auto font-bold" id="total"> 
                                         @isset($total)
                                             {{ $total }}
                                         @else
@@ -127,16 +130,21 @@
                                         @endisset
                                         MAD
                                     </span></li>
-                            </ul>
-                            <button type="submit"
-                                class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
-                                out</button>
-                        </div>
+                            </ul> 
+                            <form action="{{ route('pay.order') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="total" value="{{ $total }}">
+                                <button type="submit"
+                                    class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
+                                    out</button>
+                            </form>
+
+                         </div>
                     </div>
                 </div>
 
             </div>
-    @endif
+    @endif 
 
 @endsection
 

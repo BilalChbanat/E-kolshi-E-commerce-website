@@ -10,4 +10,12 @@ class Payment extends Model
     use HasFactory;
 
     public $table = 'payments';
+
+    public $fillable = [
+        'user_id',
+        'order_id',
+        'amount',
+        'currency',
+        'payment_method'
+    ];
 }

@@ -15,6 +15,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $products = $user->products();
+        // $user_role_id = $user->role_id();
         return view('profile.show', compact('user', 'products'));
     }
 
