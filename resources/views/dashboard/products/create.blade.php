@@ -100,11 +100,7 @@
                                                 class="border p-2 rounded w-full cursor-not-allowed" name="email"
                                                 disabled>
                                         </div>
-                                        {{-- <div class="mb-4">
-                                            <input type="number" placeholder="quantity In Available"
-                                                class="border p-2 rounded w-full cursor-not-allowed" name="QuantityAvailable"
-                                               >
-                                        </div> --}}
+                                        
                                         <div class="mb-4">
                                             <input type="number" placeholder="quantity In Stock"
                                                 class="border p-2 rounded w-full" name="quantityInStock"

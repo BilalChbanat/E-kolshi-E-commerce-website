@@ -45,7 +45,6 @@ class HomeController extends Controller
     public function showProducts(Request $request)
     {
         $products = Product::all();
-        dd($products);
         if (!empty($request->keyword)) {
             $products = Product::where("title", "like", "%" . $request->keyword . "%")->get();
             return view('searchResault', compact('products'));
