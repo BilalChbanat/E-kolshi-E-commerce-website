@@ -107,6 +107,7 @@ Route::group(['middleware' => ['auth', 'clearsession']], function () {
 //search and filter 
 Route::get('/products/filter', [HomeController::class, 'index'])->name('products.filter.index');
 Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.products.search');
+Route::post('/search/products', [HomeController::class, 'showSearch'])->name('dashboard.products.search');
 Route::get('/products/all', [HomeController::class, 'products'])->name('products.all');
 
 

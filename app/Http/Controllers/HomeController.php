@@ -55,6 +55,19 @@ class HomeController extends Controller
             return view('searchResault', compact('products'));
         }
     }
+    public function showSearch(Request $request)
+    {
+        $products = Product::all();
+
+        if (!empty($request->keyword)) {
+            $products = Product::where("title", "like", "%" . $request->keyword . "%")->get();
+            return view('showResault', compact('products'));
+
+        } else {
+            $products = Product::all();
+            return view('showResault', compact('products'));
+        }
+    }
 
 
     public function products(Request $request)
@@ -90,4 +103,16 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $products = Product::where('title', 'like', '%' . $keyword . '%')
+            ->orWhere('description', 'like', '%' . $keyword . '%')
+            ->get();
+
+        return response()->json(['products' => $products]);
+    }
+
 }

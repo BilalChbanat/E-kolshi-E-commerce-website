@@ -4,18 +4,34 @@ $.ajaxSetup({
     },
 });
 
-$.ajaxSetup({
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    },
-});
-
 $(document).ready(function () {
+    // Function to perform search
+    function search(keyword) {
+        $("#search").keyup(function () {
+            var input = $(this).val();
+            console.log(input);
+            if (input == " ") input = "all";
+            $.ajax({
+                url: "/search/products",
+                method: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    keyword: input,
+                },
+                success: function (data) {
+                    $("#product_container").html(data);
+                    // console.log(data);
+                },
+            });
+        });
+    }
+
+    // Trigger search when categories change
     $("#categories").change(function () {
         var categorieId = $(this).val();
         console.log(categorieId);
         $.ajax({
-            type: "POST", // Change this to POST
+            type: "POST",
             url: "/searchBycategorie",
             data: {
                 categorie: categorieId,
@@ -29,6 +45,15 @@ $(document).ready(function () {
             },
         });
     });
+
+    // Trigger search on keyup event in the search input field
+    $("#search").on("keyup", function () {
+        var keyword = $(this).val(); // Get the keyword from the input field
+        search(keyword);
+    });
+
+    // Trigger search initially when page loads
+    search(""); // Perform an empty search initially to get all products
 });
 
 function displayProducts(products) {
