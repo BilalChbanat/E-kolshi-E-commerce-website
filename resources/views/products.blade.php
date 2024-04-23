@@ -75,7 +75,7 @@
                         @endphp
                         <p class="mt-2 text-sm text-gray-500 min-w-24 max-h-28 min-h-28">{{ $product->shortDescription }}</p>
                         <div class="flex items-center justify-between mt-4">
-                            <span class="text-lg font-bold text-gray-900">{{ $product->price }}$</span>
+                            <span class="text-lg font-bold text-gray-900">{{ $product->price }} MAD</span>
 
                             <a href="{{ route('cart.add', $product->id) }}"
                                 class="px-4 py-2 font-bold text-white bg-primary-100 rounded-full hover:bg-primary-300">Add
