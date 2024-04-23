@@ -83,7 +83,8 @@
         <div class="flex flex-wrap">
             @isset($products)
                 @forelse ($products as $item)
-                    <div class="max-w-sm ml-[8rem] w-[35rem] lg:max-w-[42rem] lg:flex m-7">
+                    <a href="{{ url('products/' . $item->id . '/detail') }}"
+                        class="max-w-sm ml-[8rem] w-[35rem] lg:max-w-[42rem] lg:flex m-7">
                         <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
                             style="background-image: url({{ asset($item->image) }})" title="Woman holding a mug">
                         </div>
@@ -103,7 +104,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
+
+
                 @empty
                     <div class="text-center w-full mt-4">
                         <h1 class="text-2xl font-bold text-gray-400 pb-24">No products found</h1>
@@ -112,6 +115,41 @@
             @else
                 <div class="text-center w-full mt-4">
                     <h1 class="text-2xl font-bold text-gray-400 pb-24">No products found</h1>
+                </div>
+            @endisset
+        </div>
+        <div class="flex flex-wrap">
+            @isset($orders)
+                @forelse ($orders as $order)
+                    <a class="relative block p-8 border border-gray-100 shadow-xl rounded-xl" href="">
+                        <span
+                            class="absolute right-4 top-4 rounded-full px-3 py-1.5 bg-green-100 text-green-600 font-medium text-xs">
+                            4.3
+                        </span>
+
+                        <div class="mt-4 text-gray-500 sm:pr-8">
+                            <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                </path>
+                            </svg>
+
+                            <h5 class="mt-4 text-xl font-bold text-gray-900">Science of Chemstry</h5>
+
+                            <p class="hidden mt-2 text-sm sm:block">
+                                You can manage phone, email and chat conversations all from a single mailbox.
+                            </p>
+                        </div>
+                    </a>
+                @empty
+                    <div class="text-center w-full mt-4">
+                        <h1 class="text-2xl font-bold text-gray-400 pb-24">No commands purshased</h1>
+                    </div>
+                @endforelse
+            @else
+                <div class="text-center w-full mt-4">
+                    <h1 class="text-2xl font-bold text-gray-400 pb-24">No commands purshased</h1>
                 </div>
             @endisset
         </div>

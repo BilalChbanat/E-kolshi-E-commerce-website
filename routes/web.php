@@ -77,8 +77,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 //products
-Route::group(['middleware' => ['auth']], function () {
-
+Route::group(['middleware' => ['auth', 'clearsession']], function () {
     //cart
     Route::get('cart', [CartController::class, 'index'])->name('shop.cart');
     Route::get('cart/{id}/add', [CartController::class, 'add'])->name('cart.add');
@@ -108,8 +107,10 @@ Route::group(['middleware' => ['auth']], function () {
 //search and filter 
 Route::get('/products/filter', [HomeController::class, 'index'])->name('products.filter.index');
 Route::post('/search', [HomeController::class, 'showProducts'])->name('dashboard.products.search');
+Route::get('/products/all', [HomeController::class, 'products'])->name('products.all');
 
 
+Route::post('/searchBycategorie', [HomeController::class, 'filterByCategorie'])->name('searchBycategorie');
 
 
 

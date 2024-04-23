@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +16,11 @@ class ProfileController extends Controller
     public function show(string $id)
     {
         $user = Auth::user();
-        $products = $user->products();
-        // $user_role_id = $user->role_id();
-        return view('profile.show', compact('user', 'products'));
+        $products = Product::where('seller', $user->id)->get();
+        $orders = Order::where('user_id', $user->id)->get();
+        return view('profile.show', compact('user', 'products', 'orders'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

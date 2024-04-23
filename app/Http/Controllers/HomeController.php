@@ -45,7 +45,7 @@ class HomeController extends Controller
     public function showProducts(Request $request)
     {
         $products = Product::all();
-        
+
         if (!empty($request->keyword)) {
             $products = Product::where("title", "like", "%" . $request->keyword . "%")->get();
             return view('searchResault', compact('products'));
@@ -57,16 +57,31 @@ class HomeController extends Controller
     }
 
 
+    public function products(Request $request)
+    {
+        $user = Auth::user();
+        $products = Product::all();
+        $categories = Category::all();
+
+
+        return view('products', compact('products', 'categories', 'user'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function filterByCategorie(Request $request)
     {
-        //
+        $categorieId = $request->input('categorie');
+
+        $products = Product::where('category_id', $categorieId)->get();
+        return response()->json(['products' => $products]);
+
     }
 
-    
+
 
     /**
      * Remove the specified resource from storage.

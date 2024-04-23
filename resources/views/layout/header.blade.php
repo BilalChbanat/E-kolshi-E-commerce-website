@@ -19,7 +19,7 @@
             <img class="w-[10em]" src="{{ asset('images/logo.png') }}" alt="E-kolshi Logo">
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center px-3">
-            <a class="mr-5 cursor-pointer hover:text-orange-700">Store</a>
+            <a href="{{ route('products.all')}}" class="mr-5 cursor-pointer hover:text-orange-700">Store</a>
             <a class="mr-5 cursor-pointer hover:text-orange-700">About Us</a>
             <a class="mr-5 cursor-pointer hover:text-orange-700">Contact us</a>
 
