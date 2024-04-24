@@ -113,18 +113,16 @@
                     </div>
                 @endforelse
             @else
-                <div class="text-center w-full mt-4">
-                    <h1 class="text-2xl font-bold text-gray-400 pb-24">No products found</h1>
-                </div>
+                
             @endisset
         </div>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap ml-20 mb-16">
             @isset($orders)
                 @forelse ($orders as $order)
-                    <a class="relative block p-8 border border-gray-100 shadow-xl rounded-xl" href="">
+                    <a class="relative block p-8 border border-gray-100 shadow-xl rounded-xl m-6" href="#">
                         <span
                             class="absolute right-4 top-4 rounded-full px-3 py-1.5 bg-green-100 text-green-600 font-medium text-xs">
-                            4.3
+                            {{$order->status}}
                         </span>
 
                         <div class="mt-4 text-gray-500 sm:pr-8">
@@ -135,10 +133,11 @@
                                 </path>
                             </svg>
 
-                            <h5 class="mt-4 text-xl font-bold text-gray-900">Science of Chemstry</h5>
+                            <h5 class="mt-4 text-xl font-bold text-gray-900">
+                            {{ $order->total_amount }} $</h5>
 
                             <p class="hidden mt-2 text-sm sm:block">
-                                You can manage phone, email and chat conversations all from a single mailbox.
+                                Contact us for more details
                             </p>
                         </div>
                     </a>

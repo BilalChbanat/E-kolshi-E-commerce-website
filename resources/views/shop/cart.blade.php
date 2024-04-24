@@ -26,16 +26,43 @@
                 </div>
             </div>
         @else
-        
             <div class="font-[sans-serif] bg-white py-4">
                 <div class="font-[sans-serif] bg-white py-4">
-
                     <div class="max-w-7xl mx-auto">
-                        <h2 class="text-3xl font-extrabold text-[#333]">Shopping Cart</h2>
+                        <h2 class="text-3xl font-extrabold text-[#333] mb-4">Shopping Cart</h2>
                         <div class="overflow-x-auto">
                             @if ($carts->isEmpty())
                                 <p class="text-lg font-bold text-[#333]">Cart is empty</p>
                             @else
+                                @if (session('error'))
+                                    <div id="alert-additional-content-2"
+                                    class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50   "
+                                    role="alert">
+                                    <div class="flex items-center">
+                                        <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <h3 class="text-lg font-medium">Oops somthing went wrong</h3>
+                                    </div>
+                                    <div class="mt-2 mb-4 text-sm">
+                                        {{ session('error') }}
+                                    </div>
+                                    <div class="flex">
+                                        <button type="button"
+                                            class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center">
+                                            <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 20 14">
+                                                <path
+                                                    d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                                            </svg>
+                                            Contact us for more information
+                                        </button>
+                                    </div>
+                                </div>
+                                @endif
                                 <table class="mt-12 w-full border-collapse divide-y" id='cart'>
                                     <thead class="whitespace-nowrap text-left">
                                         <tr>
@@ -49,7 +76,7 @@
                                     <tbody class="whitespace-nowrap divide-y">
 
                                         @php $total = 0 @endphp
-                                         @foreach ($carts as $cart)
+                                        @foreach ($carts as $cart)
                                             <form action="{{ route('cart.update', $cart->id) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
@@ -99,8 +126,8 @@
                                                     @endphp
                                                 </tr>
                                             </form>
-                                        @endforeach 
-                                     </tbody>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             @endif
 
@@ -114,15 +141,16 @@
                                         @else
                                             0
                                         @endisset
-                                     </span></li>
-                                <li class="flex flex-wrap gap-4 text-md py-3">Shipping <span class="ml-auto font-bold">0.00
+                                    </span></li>
+                                <li class="flex flex-wrap gap-4 text-md py-3">Shipping <span
+                                        class="ml-auto font-bold">0.00
                                         MAD</span>
                                 </li>
                                 <li class="flex flex-wrap gap-4 text-md py-3">Tax <span class="ml-auto font-bold">0.00
                                         MAD</span>
                                 </li>
                                 <li class="flex flex-wrap gap-4 text-md py-3 font-bold">Total <span
-                                        class="ml-auto font-bold" id="total"> 
+                                        class="ml-auto font-bold" id="total">
                                         @isset($total)
                                             {{ $total }}
                                         @else
@@ -130,7 +158,7 @@
                                         @endisset
                                         MAD
                                     </span></li>
-                            </ul> 
+                            </ul>
                             <form action="{{ route('pay.order') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="total" value="{{ $total }}">
@@ -139,12 +167,12 @@
                                     out</button>
                             </form>
 
-                         </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
-    @endif 
+    @endif
 
 @endsection
 

@@ -21,9 +21,12 @@ class PaymentController extends Controller
         $user = Auth::user();
         $carts = $user->carts;
 
+        // dd($totalAmount);
+
         foreach ($carts as $cart) {
             $product = $cart->product;
-            $unitAmount = $product->price * 10;
+            $unitAmount =(int) ($product->price *10);
+            // dd($unitAmount);
             $quantity = $cart->quantity;
             $lineItems[] = [
                 'price_data' => [
@@ -37,9 +40,10 @@ class PaymentController extends Controller
             ];
 
             // Calculate the total amount for the order
-            $totalAmount += ($unitAmount * $quantity);
+            $totalAmount += ($unitAmount * $quantity) ;
         }
 
+        // dd($totalAmount);
         // Create a Checkout session with the calculated line items
         $checkout_session = Session::create([
             'line_items' => $lineItems,
@@ -59,6 +63,7 @@ class PaymentController extends Controller
         $currency = 'USD';
         $userId = Auth::id();
 
+        // dd($totalAmount);
         // Create a new order record
         $order = Order::create([
             'user_id' => $userId,
@@ -67,14 +72,16 @@ class PaymentController extends Controller
             'status' => 'paid',
         ]);
 
+
         // Create a new payment record
-        Payment::create([
+        $payment = Payment::create([
             'user_id' => $userId,
             'order_id' => $order->id,
             'amount' => $totalAmount,
             'currency' => $currency,
             'payment_method' => 'stripe',
         ]);
+
 
         // Decrement the QuantityAvailable for each product in the cart
         $carts = $user->carts;
@@ -84,7 +91,7 @@ class PaymentController extends Controller
                 $product->QuantityAvailable -= $cart->quantity;
                 $product->save();
             } else {
-                return redirect()->back()->with('error', 'Insufficient quantity available for ' . $product->title);
+                return redirect()->route('shop.cart')->with('error', 'Insufficient quantity available for ' . $product->title);
             }
         }
 
